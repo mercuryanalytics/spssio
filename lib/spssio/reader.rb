@@ -6,10 +6,17 @@ module SPSS
   class Reader < Base
     include Enumerable
 
+    attr_reader :variables
+
     def initialize(filename)
-      @handle = API.open_read(filename)
       @variable_handles = Hash.new { |hash, key| hash[key] = allocate_var_handle(key) }
+      @variables = Hash.new { |hash, key| hash[key] = Variable.new(handle, key) }
       @value_labels = Hash.new { |hash, key| hash[key] = read_value_labels(key) }
+      @handle = API.open_read(filename)
+      if block_given?
+        yield self
+        close
+      end
     end
 
     def close
@@ -64,7 +71,7 @@ module SPSS
       raise Error, "No such variable #{name.inspect}" if sz.nil?
 
       if sz.zero?
-        value_label(name, API.get_value_numeric(handle, variable_handle(name)))
+        API.get_value_numeric(handle, variable_handle(name))
       else
         API.get_value_char(handle, variable_handle(name), sz)
       end
@@ -78,6 +85,18 @@ module SPSS
         API.read_case_record(handle)
         yield cr
       end
+    end
+
+    def variable_missing_values(name)
+      if variable_sizes[name].zero?
+        API.get_var_n_missing_values(handle, name)
+      else
+        API.get_var_c_missing_values(handle, name)
+      end
+    end
+
+    def variable_sizes
+      @variable_sizes ||= Hash[API.get_var_names(handle)]
     end
 
     private
@@ -106,10 +125,6 @@ module SPSS
           yield fetch(name)
         end
       end
-    end
-
-    def variable_sizes
-      @variable_sizes ||= Hash[API.get_var_names(handle)]
     end
 
     def allocate_var_handle(name)

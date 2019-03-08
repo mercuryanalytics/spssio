@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'ffi'
+require 'pathname'
 
 module SPSS
   MAX_VARNAME = 64
@@ -13,15 +14,21 @@ module SPSS
     extend FFI::Library
 
     ffi_convention :stdcall
+
+    def self.find(name)
+      path = Pathname.new(__dir__).parent.parent + "ext"
+      [name, *Dir.glob("#{path}/macos/#{name}.*")]
+    end
+
     begin
-      ffi_lib ["libgsk8iccs", "ext/macos/libgsk8iccs.dylib"]
+      ffi_lib find("libgsk8iccs")
     rescue LoadError # rubocop:disable Lint/HandleExceptions
     end
-    ffi_lib ["libicudata.51.2", "ext/macos/libicudata.51.2.dylib", "ext/lin64/libicudata.so.51.2"]
-    ffi_lib ["libicuuc.51.2", "ext/macos/libicuuc.51.2.dylib", "ext/lin64/libicuuc.so.51.2"]
-    ffi_lib ["libicui18n.51.2", "ext/macos/libicui18n.51.2.dylib", "ext/lin64/libicui18n.so.51.2"]
-    ffi_lib ["libzlib1211spss", "ext/macos/libzlib1211spss.dylib", "ext/lin64/libzlib1211spss.so"]
-    ffi_lib ["libspssdio", "ext/macos/libspssdio.dylib", "ext/lin64/libspssdio.so.1"]
+    ffi_lib find("libicudata")
+    ffi_lib find("libicuuc")
+    ffi_lib find("libicui18n")
+    ffi_lib find("libzlib1211spss")
+    ffi_lib find("libspssdio")
 
     module MultRespDefLayout
       def self.included(base)

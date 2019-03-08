@@ -713,7 +713,7 @@ module SPSS
 
     def set_var_n_value_labels(handle, var_names, value_labels)
       vars = string_array(var_names)
-      values = string_array(value_labels.map(&:first))
+      values = numeric_array(value_labels.map(&:first))
       labels = string_array(value_labels.map(&:last))
       check! LIBSPSSDIO.spssSetVarNValueLabels(handle, vars, var_names.size, values, labels, value_labels.size)
     end
@@ -767,6 +767,12 @@ module SPSS
 
     def check!(code)
       Status.status!(code)
+    end
+
+    def numeric_array(numbers)
+      result = FFI::MemoryPointer.new(:pointer, numbers.size)
+      result.write_array_of_double(numbers)
+      result
     end
 
     def string_array(strings)

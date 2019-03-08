@@ -1,0 +1,7 @@
+# Ignore bundler config.
+/.bundle
+
+/Notes
+/sandbox
+/.envrc
+/spec/examples.txt
