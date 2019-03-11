@@ -17,14 +17,14 @@ module SPSS
 
     def self.status(code)
       return :ok if code.zero?
-      return WARNINGS[-code - 1] || :"unknown_warning_#{-code}" if code.negative?
+      return WARNINGS[-code - 1] || :"unknown_warning_#{-code}" if code < 0
 
       ERRORS[code - 1] || :"unknown_error_#{code}"
     end
 
     def self.status!(code)
       return if code.zero?
-      raise Warning, status(code) if code.negative?
+      raise Warning, status(code) if code < 0
 
       raise Error, status(code)
     end
