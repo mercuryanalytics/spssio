@@ -17,7 +17,7 @@ module SPSS
 
     def self.find(name)
       path = Pathname.new(__dir__).parent.parent + "ext"
-      [name, *Dir.glob("#{path}/macos/#{name}.*")]
+      [name, *Dir.glob("#{path}/*/#{name}.*")]
     end
 
     begin
