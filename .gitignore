@@ -1,6 +1,8 @@
 # Ignore bundler config.
 /.bundle
 
+/.ruby-version
+
 /Notes
 /sandbox
 /.envrc
