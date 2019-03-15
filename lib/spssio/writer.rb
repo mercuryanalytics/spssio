@@ -35,6 +35,11 @@ module SPSS
       end
     end
 
+    def number_of_cases
+      @number_of_cases ||= API.get_number_of_cases(handle)
+    end
+    alias size number_of_cases
+
     def close
       API.close_write(handle)
     end

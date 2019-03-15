@@ -42,6 +42,7 @@ module SPSS
     def number_of_cases
       @number_of_cases ||= API.get_number_of_cases(handle)
     end
+    alias size number_of_cases
 
     def variable_handle(name)
       @variable_handles[name]
