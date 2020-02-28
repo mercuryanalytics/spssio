@@ -32,10 +32,7 @@ module SPSS
     ffi_lib find("libicuuc")
     ffi_lib find("libicui18n")
     ffi_lib find("libzlib1211spss")
-    begin
-      ffi_lib find("libspssdio")
-    rescue LoadError # rubocop:disable Lint/HandleExceptions
-    end
+    ffi_lib find("libspssdio")
 
     module MultRespDefLayout
       def self.included(base)
