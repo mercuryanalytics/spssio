@@ -5,7 +5,8 @@ module SPSS
   class Warning < Error; end
 
   module Status
-    WARNINGS = %i[exc_len64 exc_varlabel unknown_warning_3 exc_vallabel file_end no_varsets empty_varsets no_labels no_label no_casewgt no_dateinfo no_multresp empty_multresp no_dew empty_dew].freeze
+    WARNINGS = %i[exc_len64 exc_varlabel unknown_warning_3 exc_vallabel file_end no_varsets empty_varsets no_labels
+                  no_label no_casewgt no_dateinfo no_multresp empty_multresp no_dew empty_dew].freeze
     ERRORS = %i[file_oerror file_werror file_rerror fitab_full invalid_handle invalid_file no_memory open_rdmode open_wrmode invalid_varname dict_empty var_notfound dup_var nume_exp str_exp shortstr_exp invalid_vartype invalid_missfor invalid_compsw invalid_prfor invalid_wrfor invalid_date invalid_time no_variables mixed_types unknown_error_26 dup_value invalid_casewgt incompatible_dict dict_commit dict_notcommit unknown_error_32 no_type2
                 unknown_error_33 unknown_error_34 unknown_error_35 unknown_error_36 unknown_error_37 unknown_error_38 unknown_error_39 unknown_error_40
                 no_type73 unknown_error_42 unknown_error_43 unknown_error_44

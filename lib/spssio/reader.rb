@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spssio/base'
+require "spssio/base"
 
 module SPSS
   class Reader < Base
@@ -13,10 +13,10 @@ module SPSS
       @variables = Hash.new { |hash, key| hash[key] = Variable.new(handle, key) }
       @value_labels = Hash.new { |hash, key| hash[key] = read_value_labels(key) }
       @handle = API.open_read(filename)
-      if block_given?
-        yield self
-        close
-      end
+      return unless block_given?
+
+      yield self
+      close
     end
 
     def close

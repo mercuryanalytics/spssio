@@ -6,13 +6,13 @@ require "csv" # TODO: remove
 
 RSpec.describe SPSS::Reader do
   # let(:savfile) { File.join("fixtures", "MA2912GSSONE.sav") }
+  subject { described_class.new(savfile) }
+
   let(:savfile) { "sandbox/2018PilotsExamples/Bright Futures/PLTBRF20 Orlando.sav" }
   let(:n_vars) { 327 }
   let(:n_cases) { 206 }
 
-  subject { described_class.new(savfile) }
-
-  after(:example) do
+  after do
     subject.close
   end
 
@@ -31,7 +31,7 @@ RSpec.describe SPSS::Reader do
 
   it "can return a variable handle" do
     expect(subject.variable_handle("RID")).to be_a Numeric
-    expect(subject.variable_handle("bad_var")).to be nil
+    expect(subject.variable_handle("bad_var")).to be_nil
   end
 
   it "can return the labels for a variable" do
@@ -40,13 +40,14 @@ RSpec.describe SPSS::Reader do
 
   it "can return the labels for a variable's values" do
     expect(subject.values("RID")).to eq :no_labels
-    expect(subject.values("DayOfWeek")).to include(1.0 => "Monday", 2.0 => "Tuesday", 3.0 => "Wednesday", 4.0 => "Thursday", 5.0 => "Friday", 6.0 => "Saturday", 7.0 => "Sunday")
+    expect(subject.values("DayOfWeek")).to include(1.0 => "Monday", 2.0 => "Tuesday", 3.0 => "Wednesday",
+                                                   4.0 => "Thursday", 5.0 => "Friday", 6.0 => "Saturday", 7.0 => "Sunday")
   end
 
   context "at the first record" do
     let(:enum) { subject.each }
 
-    before(:example) do
+    before do
       enum.next
     end
 

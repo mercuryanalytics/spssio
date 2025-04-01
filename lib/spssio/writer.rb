@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'variable'
+require_relative "variable"
 
 # module SPSS
 #   class Writer < Base
@@ -29,10 +29,10 @@ module SPSS
     def initialize(filename)
       @handle = API.open_write(filename)
       @variables = Hash.new { |hash, key| hash[key] = Variable.new(handle, key) }
-      if block_given?
-        yield self
-        close
-      end
+      return unless block_given?
+
+      yield self
+      close
     end
 
     def number_of_cases

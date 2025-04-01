@@ -14,8 +14,8 @@ RSpec.describe SPSS::API do
 
   # NOTE: these can't be reliably called once the library has actually "done" anything so the test is currently suppressed
   it "can set the interface encoding", :not_tested do
-    expect { subject.set_interface_encoding(SPSS::ENCODING_UTF8) }.to_not raise_exception
-    expect { subject.set_interface_encoding(SPSS::ENCODING_CODEPAGE) }.to_not raise_exception
+    expect { subject.set_interface_encoding(SPSS::ENCODING_UTF8) }.not_to raise_exception
+    expect { subject.set_interface_encoding(SPSS::ENCODING_CODEPAGE) }.not_to raise_exception
   end
 
   it "can return the system-missing value" do
@@ -51,7 +51,7 @@ RSpec.describe SPSS::API do
   end
 
   it "can set the temp directory" do
-    expect { subject.set_temp_dir(ENV["TMPDIR"]) }.to_not raise_exception
+    expect { subject.set_temp_dir(ENV.fetch("TMPDIR", nil)) }.not_to raise_exception
   end
 
   it "can validate proposed variable names" do
@@ -83,7 +83,7 @@ RSpec.describe SPSS::API do
   context "opening SAV files for writing" do
     let(:savfile) { Tempfile.new("spssio") }
 
-    after(:each) do
+    after do
       savfile.unlink
     end
 
@@ -102,13 +102,13 @@ RSpec.describe SPSS::API do
 
   context "opening SAV files for append" do
     let(:original) { File.join("fixtures", "MA2912GSSONE.sav") }
-    let(:savfile) { Tempfile.new('spssio') }
+    let(:savfile) { Tempfile.new("spssio") }
 
-    before(:example) do
+    before do
       FileUtils.cp(original, savfile.path)
     end
 
-    after(:example) do
+    after do
       savfile.unlink
     end
 
@@ -147,7 +147,7 @@ RSpec.describe SPSS::API do
       @savfile.unlink
     end
 
-    after(:example) do
+    after do
       subject.close_read(handle)
     end
 
@@ -295,7 +295,8 @@ RSpec.describe SPSS::API do
       end
 
       it "can read the variable label" do
-        expect(subject.get_var_label(handle, "M2MError_Email")).to eq "Thank you for your willingness to help.<p>Initially, we will contact you by email.  Again, this contact would only be fo"
+        expect(subject.get_var_label(handle,
+                                     "M2MError_Email")).to eq "Thank you for your willingness to help.<p>Initially, we will contact you by email.  Again, this contact would only be fo"
       end
 
       it "can read the variable label (long form)" do
@@ -346,15 +347,21 @@ RSpec.describe SPSS::API do
         end
 
         it "can return the value labels" do
-          expect { subject.get_var_c_value_labels(handle, "M2MError_Email") }.to raise_exception SPSS::Warning, "no_labels"
+          expect do
+            subject.get_var_c_value_labels(handle, "M2MError_Email")
+          end.to raise_exception SPSS::Warning, "no_labels"
         end
 
         it "can return the label for a single value" do
-          expect { subject.get_var_c_value_label(handle, "M2MError_Email", "x") }.to raise_exception SPSS::Warning, "no_labels"
+          expect do
+            subject.get_var_c_value_label(handle, "M2MError_Email", "x")
+          end.to raise_exception SPSS::Warning, "no_labels"
         end
 
         it "can return long labels" do
-          expect { subject.get_var_c_value_label_long(handle, "M2MError_Email", "x", 256) }.to raise_exception SPSS::Warning, "no_labels"
+          expect do
+            subject.get_var_c_value_label_long(handle, "M2MError_Email", "x", 256)
+          end.to raise_exception SPSS::Warning, "no_labels"
         end
       end
 
@@ -378,15 +385,15 @@ RSpec.describe SPSS::API do
     end
 
     it "can read case records" do
-      expect { subject.read_case_record(handle) }.to_not raise_exception
+      expect { subject.read_case_record(handle) }.not_to raise_exception
     end
 
     it "can seek to a specific case by index" do
-      expect { subject.seek_next_case(handle, 3) }.to_not raise_exception
+      expect { subject.seek_next_case(handle, 3) }.not_to raise_exception
     end
 
     context "case data" do
-      before(:example) do
+      before do
         subject.read_case_record(handle)
       end
 
@@ -415,18 +422,18 @@ RSpec.describe SPSS::API do
     let(:savfile) { Tempfile.new("spssio") }
     let(:handle) { subject.open_write(savfile.path) }
 
-    after(:example) do
+    after do
       subject.close_write(handle)
       savfile.unlink
     end
 
     it "can set the case weight variable name", :not_tested do
       pending "the variable has to be defined"
-      expect { subject.set_case_weight_var(handle, "Weight") }.to_not raise_error
+      expect { subject.set_case_weight_var(handle, "Weight") }.not_to raise_error
     end
 
     it "can get the compression attribute" do
-      expect { subject.set_compression(handle, 1) }.to_not raise_error
+      expect { subject.set_compression(handle, 1) }.not_to raise_error
     end
 
     it "can report the forcasting (trends) date variable information", :not_tested do
@@ -440,15 +447,15 @@ RSpec.describe SPSS::API do
     end
 
     it "can set the file attributes" do
-      expect { subject.set_file_attributes(handle, [["attr1", "val 1"], ["attr2", "val 2"]]) }.to_not raise_error
+      expect { subject.set_file_attributes(handle, [["attr1", "val 1"], ["attr2", "val 2"]]) }.not_to raise_error
     end
 
     it "can set the file id string" do
-      expect { subject.set_id_string(handle, "My File") }.to_not raise_error
+      expect { subject.set_id_string(handle, "My File") }.not_to raise_error
     end
 
     it "can set the multiple response sets" do
-      expect { subject.set_mult_resp_defs(handle, <<~DEFS) }.to_not raise_error
+      expect { subject.set_mult_resp_defs(handle, <<~DEFS) }.not_to raise_error
         $AllowedProvider=D1 1 23 Allowed Sample Provider AllowedProvider01 AllowedProvider02 AllowedProvider03 AllowedProvider04 AllowedProvider05 AllowedProvider06 AllowedProvider07 AllowedProvider08 AllowedProvider09 AllowedProvider10
         $RACE=D1 1 106 Which of the following groups best represent your ethnic background? You may select <u>all</u> that apply. RACE1 RACE2 RACE3 RACE4 RACE5 RACE6 RACE7 RACE8
         $TODAYWATCH=D1 1 92 Please identify the types of TV shows you have watched today? You may select all that apply. TODAYWATCH1 TODAYWATCH2 TODAYWATCH3 TODAYWATCH4 TODAYWATCH5 TODAYWATCH6
@@ -461,7 +468,7 @@ RSpec.describe SPSS::API do
     end
 
     it "can read the text info" do
-      expect { subject.set_text_info(handle, "My text info") }.to_not raise_error
+      expect { subject.set_text_info(handle, "My text info") }.not_to raise_error
     end
 
     it "can read the variable sets", :not_tested do

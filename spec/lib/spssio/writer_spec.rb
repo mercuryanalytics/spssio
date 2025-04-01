@@ -4,10 +4,11 @@ require "spssio"
 require "tempfile"
 
 RSpec.describe SPSS::Writer do
-  let(:savfile) { Tempfile.new(["spssio", ".sav"]) }
   subject { described_class.new(savfile.path) }
 
-  after(:example) do
+  let(:savfile) { Tempfile.new(["spssio", ".sav"]) }
+
+  after do
     subject.close
   end
 

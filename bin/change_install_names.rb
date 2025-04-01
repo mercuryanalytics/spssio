@@ -13,7 +13,7 @@ def set_install_id(dylib_path, id)
 end
 
 def install_names(dylib_path)
-  `otool -L #{dylib_path}`.split("\n").map { |s| s.gsub(/^\t(.*) \(.*\).*$/, '\1') }
+  `otool -L #{dylib_path}`.split("\n").map { |s| s.gsub(%r{^\t(.*) \(.*\).*$}, '\1') }
 end
 
 def set_install_name(dylib_path, old_name, new_name)

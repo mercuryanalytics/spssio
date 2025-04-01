@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'ffi'
-require 'pathname'
+require "ffi"
+require "pathname"
 
 module SPSS
   MAX_VARNAME = 64

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'spssio/libspssdio'
-require 'spssio/status'
+require "spssio/libspssdio"
+require "spssio/status"
 
 module SPSS
   module IO
@@ -12,7 +12,8 @@ module SPSS
     end
 
     def add_mult_resp_def_c(handle, mr_set_name, mr_set_label, is_dichotomy, counted_value, var_names, num_vars)
-      check! LIBSPSSDIO.spssAddMultRespDefC(handle, mr_set_name, mr_set_label, is_dichotomy, counted_value, var_names, num_vars)
+      check! LIBSPSSDIO.spssAddMultRespDefC(handle, mr_set_name, mr_set_label, is_dichotomy, counted_value, var_names,
+                                            num_vars)
     end
 
     def add_mult_resp_def_ext(handle, p_set)
@@ -20,7 +21,8 @@ module SPSS
     end
 
     def add_mult_resp_def_n(handle, mr_set_name, mr_set_label, is_dichotomy, counted_value, var_names, num_vars)
-      check! LIBSPSSDIO.spssAddMultRespDefN(handle, mr_set_name, mr_set_label, is_dichotomy, counted_value, var_names, num_vars)
+      check! LIBSPSSDIO.spssAddMultRespDefN(handle, mr_set_name, mr_set_label, is_dichotomy, counted_value, var_names,
+                                            num_vars)
     end
 
     def add_var_attribute(handle, var_name, attrib_name, attrib_sub, attrib_text)
@@ -677,7 +679,8 @@ module SPSS
 
     def set_var_c_missing_values(handle, var_name, missing)
       missing_val1, missing_val2, missing_val3 = missing
-      check! LIBSPSSDIO.spssSetVarCMissingValues(handle, var_name, missing.size, missing_val1, missing_val2, missing_val3)
+      check! LIBSPSSDIO.spssSetVarCMissingValues(handle, var_name, missing.size, missing_val1, missing_val2,
+                                                 missing_val3)
     end
 
     def set_var_column_width(handle, var_name, column_width)
@@ -704,7 +707,8 @@ module SPSS
 
     def set_var_n_missing_values(handle, var_name, missing)
       missing_val1, missing_val2, missing_val3 = missing
-      check! LIBSPSSDIO.spssSetVarNMissingValues(handle, var_name, missing.size, missing_val1, missing_val2, missing_val3)
+      check! LIBSPSSDIO.spssSetVarNMissingValues(handle, var_name, missing.size, missing_val1, missing_val2,
+                                                 missing_val3)
     end
 
     def set_var_n_value_label(handle, var_name, value, label)
