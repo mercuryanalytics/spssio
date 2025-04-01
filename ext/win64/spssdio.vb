@@ -5,7 +5,7 @@
 ' 
 ' IBM SPSS Products: Statistics Common
 ' 
-' (C) Copyright IBM Corp. 1989, 2017
+' (C) Copyright IBM Corp. 1989, 2015
 ' 
 ' The source code for this program is not published or otherwise divested of its trade secrets, 
 ' irrespective of what has been deposited with the U.S. Copyright Office.
@@ -212,250 +212,250 @@ Module SpssDioInterface
     Public Const SPSS_MAX_ENCODING = 64        ' Maximum encoding text
 
 
-    ' Functions exported by spssio64.dll in alphabetical order
-    Public Declare PtrSafe Function spssAddFileAttribute Lib "spssio64.dll" _
+    ' Functions exported by spssio32.dll in alphabetical order
+    Public Declare Function spssAddFileAttribute Lib "spssio32.dll" Alias "spssAddFileAttribute@16" _
                             (ByVal handle As Integer, ByVal attribName As String, ByVal attribSub As Integer, ByVal attribText As String) As Integer
-    ' Public Declare PtrSafe Function   spssAddMultRespDefC Lib "spssio64.dll" Alias "spssAddMultRespDefC" _
+    ' Public Declare Function   spssAddMultRespDefC Lib "spssio32.dll" Alias "spssAddMultRespDefC@28" _
     '                           (ByVal handle As Integer, ByVal mrSetName As String, ByVal mrSetLabel As String, ByVal isDichotomy As Integer, ByVal countedValue As Integer, ByVal *varNames As String, ByVal numVars As Integer) As Integer
-    ' Public Declare PtrSafe Function   spssAddMultRespDefExt "spssio64.dll" Alias "spssAddMultRespDefExt" _
+    ' Public Declare Function   spssAddMultRespDefExt "spssio32.dll" Alias "spssAddMultRespDefExt@8" _
     '                           (ByVal handle As Integer, ByVal pSet as String) As Integer
-    ' Public Declare PtrSafe Function   spssAddMultRespDefN Lib "spssio64.dll" Alias "spssAddMultRespDefN" _
+    ' Public Declare Function   spssAddMultRespDefN Lib "spssio32.dll" Alias "spssAddMultRespDefN@28" _
     '                           (ByVal handle As Integer, ByVal mrSetName As String, ByVal mrSetLabel As String, ByVal isDichotomy As Integer, ByVal countedValue As String, ByVal *varNames As String, ByVal numVars As Integer) As Integer
-    Public Declare PtrSafe Function spssAddVarAttribute Lib "spssio64.dll" _
+    Public Declare Function spssAddVarAttribute Lib "spssio32.dll" Alias "spssAddVarAttribute@20" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal attribName As String, ByVal attribSub As Integer, ByVal attribText As String) As Integer
-    Public Declare PtrSafe Function spssCloseAppend Lib "spssio64.dll" _
+    Public Declare Function spssCloseAppend Lib "spssio32.dll" Alias "spssCloseAppend@4" _
                                 (ByVal handle As Integer) As Integer
-    Public Declare PtrSafe Function spssCloseRead Lib "spssio64.dll" _
+    Public Declare Function spssCloseRead Lib "spssio32.dll" Alias "spssCloseRead@4" _
                                 (ByVal handle As Integer) As Integer
-    Public Declare PtrSafe Function spssCloseWrite Lib "spssio64.dll" _
+    Public Declare Function spssCloseWrite Lib "spssio32.dll" Alias "spssCloseWrite@4" _
                                 (ByVal handle As Integer) As Integer
-    Public Declare PtrSafe Function spssCommitCaseRecord Lib "spssio64.dll" _
+    Public Declare Function spssCommitCaseRecord Lib "spssio32.dll" Alias "spssCommitCaseRecord@4" _
                                 (ByVal handle As Integer) As Integer
-    Public Declare PtrSafe Function spssCommitHeader Lib "spssio64.dll" _
+    Public Declare Function spssCommitHeader Lib "spssio32.dll" Alias "spssCommitHeader@4" _
                                 (ByVal handle As Integer) As Integer
-    Public Declare PtrSafe Function spssConvertDate Lib "spssio64.dll" _
+    Public Declare Function spssConvertDate Lib "spssio32.dll" Alias "spssConvertDate@16" _
                                 (ByVal day As Integer, ByVal month As Integer, ByVal year As Integer, ByRef spssDate As Double) As Integer
-    Public Declare PtrSafe Function spssConvertSPSSDate Lib "spssio64.dll" _
+    Public Declare Function spssConvertSPSSDate Lib "spssio32.dll" Alias "spssConvertSPSSDate@20" _
                                 (ByRef day As Integer, ByRef month As Integer, ByRef year As Integer, ByVal spssDate As Double) As Integer
-    Public Declare PtrSafe Function spssConvertSPSSTime Lib "spssio64.dll" _
+    Public Declare Function spssConvertSPSSTime Lib "spssio32.dll" Alias "spssConvertSPSSTime@24" _
                                 (ByRef day As Integer, ByRef hourh As Integer, ByRef minute As Integer, ByRef second As Double, ByVal spssDate As Double) As Integer
-    Public Declare PtrSafe Function spssConvertTime Lib "spssio64.dll" _
+    Public Declare Function spssConvertTime Lib "spssio32.dll" Alias "spssConvertTime@24" _
                                 (ByVal day As Integer, ByVal hour As Integer, ByVal minute As Integer, ByVal second As Double, ByRef spssTime As Double) As Integer
-    Public Declare PtrSafe Function spssCopyDocuments Lib "spssio64.dll" _
+    Public Declare Function spssCopyDocuments Lib "spssio32.dll" Alias "spssCopyDocuments@8" _
                                 (ByVal fromHandle As Integer, ByVal toHandle As Integer) As Integer
-    ' Public Declare PtrSafe Function   spssFreeAttributes Lib "spssio64.dll" Alias "spssFreeAttributes" _
+    ' Public Declare Function   spssFreeAttributes Lib "spssio32.dll" Alias "spssFreeAttributes@12" _
     '                           (ByRef *attribNames As String, ByRef *attribText As String, ByVal nAttributes) As Integer
-    Public Declare PtrSafe Function spssFreeDateVariables Lib "spssio64.dll" _
+    Public Declare Function spssFreeDateVariables Lib "spssio32.dll" Alias "spssFreeDateVariables@4" _
                                 (ByRef pDateInfo As Integer) As Integer
-    Public Declare PtrSafe Function spssFreeMultRespDefs Lib "spssio64.dll" _
+    Public Declare Function spssFreeMultRespDefs Lib "spssio32.dll" Alias "spssFreeMultRespDefs@4" _
                                 (ByVal pMrespDefs As Integer) As Integer
-    ' Public Declare PtrSafe Function   spssFreeMultRespDefStruct Lib "spssio64.dll" Alias "spssFreeMultRespDefStruct" _
+    ' Public Declare Function   spssFreeMultRespDefStruct Lib "spssio32.dll" Alias "spssFreeMultRespDefStruct@4" _
     '                           (ByVal pSet As String) As Integer
-    ' Public Declare PtrSafe Function   spssFreeVarCValueLabels Lib "spssio64.dll" Alias "spssFreeVarCValueLabels" _
+    ' Public Declare Function   spssFreeVarCValueLabels Lib "spssio32.dll" Alias "spssFreeVarCValueLabels@12" _
     '                           (ByRef *values As String, ByRef *labels As String, ByVal numLabels As Integer) As Integer
-    Public Declare PtrSafe Function spssFreeVariableSets Lib "spssio64.dll" _
+    Public Declare Function spssFreeVariableSets Lib "spssio32.dll" Alias "spssFreeVariableSets@4" _
                                 (ByVal pVarSets As Integer) As Integer
-    ' Public Declare PtrSafe Function   spssFreeVarNames Lib "spssio64.dll" Alias "spssFreeVarNames" _
+    ' Public Declare Function   spssFreeVarNames Lib "spssio32.dll" Alias "spssFreeVarNames@12" _
     '                           (ByVal *varNames As String, ByRef varTypes As Integer, ByVal numVars As Integer) As Integer
-    ' Public Declare PtrSafe Function   spssFreeVarNValueLabels Lib "spssio64.dll" Alias "spssFreeVarNValueLabels" _
+    ' Public Declare Function   spssFreeVarNValueLabels Lib "spssio32.dll" Alias "spssFreeVarNValueLabels@12" _
     '                           (ByRef values As Double, ByVal *labels As String, ByVal numLabels As Integer) As Integer
-    Public Declare PtrSafe Function spssGetCaseSize Lib "spssio64.dll" _
+    Public Declare Function spssGetCaseSize Lib "spssio32.dll" Alias "spssGetCaseSize@8" _
                                 (ByVal handle As Integer, ByRef caseSize As Integer) As Integer
-    Public Declare PtrSafe Function spssGetCaseWeightVar Lib "spssio64.dll" _
+    Public Declare Function spssGetCaseWeightVar Lib "spssio32.dll" Alias "spssGetCaseWeightVar@8" _
                                 (ByVal handle As Integer, ByVal varName As String) As Integer
-    Public Declare PtrSafe Function spssGetCompression Lib "spssio64.dll" _
+    Public Declare Function spssGetCompression Lib "spssio32.dll" Alias "spssGetCompression@8" _
                                 (ByVal handle As Integer, ByRef compSwitch As Integer) As Integer
-    Public Declare PtrSafe Function spssGetDateVariables Lib "spssio64.dll" _
+    Public Declare Function spssGetDateVariables Lib "spssio32.dll" Alias "spssGetDateVariables@12" _
                                 (ByVal handle As Integer, ByRef numofElements As Integer, ByRef pDateInfo As Integer) As Integer
-    Public Declare PtrSafe Function spssGetDEWFirst Lib "spssio64.dll" _
+    Public Declare Function spssGetDEWFirst Lib "spssio32.dll" Alias "spssGetDEWFirst@16" _
                                 (ByVal handle As Integer, ByVal Data As String, ByVal maxData As Integer, ByRef Data As Integer) As Integer
-    Public Declare PtrSafe Function spssGetDEWGUID Lib "spssio64.dll" _
+    Public Declare Function spssGetDEWGUID Lib "spssio32.dll" Alias "spssGetDEWGUID@8" _
                                 (ByVal handle As Integer, ByVal asciiGUID As String) As Integer
-    Public Declare PtrSafe Function spssGetDEWInfo Lib "spssio64.dll" _
+    Public Declare Function spssGetDEWInfo Lib "spssio32.dll" Alias "spssGetDEWInfo@12" _
                                 (ByVal handle As Integer, ByRef Length As Integer, ByRef HashTotal As Integer) As Integer
-    Public Declare PtrSafe Function spssGetDEWNext Lib "spssio64.dll" _
+    Public Declare Function spssGetDEWNext Lib "spssio32.dll" Alias "spssGetDEWNext@12" _
                                 (ByVal handle As Integer, ByVal Data As String, ByVal maxData As Integer, ByRef nData As Integer) As Integer
-    Public Declare PtrSafe Function spssGetEstimatedNofCases Lib "spssio64.dll" _
+    Public Declare Function spssGetEstimatedNofCases Lib "spssio32.dll" Alias "spssGetEstimatedNofCases@8" _
                                 (ByVal handle As Integer, ByRef caseCount As Integer) As Integer
-    ' Public Declare PtrSafe Function   spssGetFileAttributes Lib "spssio64.dll" Alias "spssGetFileAttributes" _
+    ' Public Declare Function   spssGetFileAttributes Lib "spssio32.dll" Alias "spssGetFileAttributes@16" _
     '                           (ByVal handle As Integer, ByVal **attribNames As String, ByVal **attribText As String, ByRef nAttributes As Integer) As Integer
-    Public Declare PtrSafe Function spssGetFileCodePage Lib "spssio64.dll" _
+    Public Declare Function spssGetFileCodePage Lib "spssio32.dll" Alias "spssGetFileCodePage@8" _
                                 (ByVal handle As Integer, ByRef nCodePage As Integer) As Integer
-    Public Declare PtrSafe Function spssGetFileEncoding Lib "spssio64.dll" _
+    Public Declare Function spssGetFileEncoding Lib "spssio32.dll" Alias "spssGetFileEncoding@8" _
                                 (ByVal handle As Integer, ByVal szEncoding As String) As Integer
-    Public Declare PtrSafe Function spssGetIdString Lib "spssio64.dll" _
+    Public Declare Function spssGetIdString Lib "spssio32.dll" Alias "spssGetIdString@8" _
                                 (ByVal handle As Integer, ByVal id As String) As Integer
-    Public Declare PtrSafe Function spssGetInterfaceEncoding Lib "spssio64.dll" _
+    Public Declare Function spssGetInterfaceEncoding Lib "spssio32.dll" Alias "spssGetInterfaceEncoding@0" _
                                 () As Integer
-    Public Declare PtrSafe Function spssGetMultRespCount Lib "spssio64.dll" _
+    Public Declare Function spssGetMultRespCount Lib "spssio32.dll" Alias "spssGetMultRespCount@8" _
                                 (ByVal handle As Integer, ByRef nSets As Integer) As Integer
-    ' Public Declare PtrSafe Function   spssGetMultRespDefByIndex Lib "spssio64.dll" Alias "spssGetMultRespDefByIndex" _
+    ' Public Declare Function   spssGetMultRespDefByIndex Lib "spssio32.dll" Alias "spssGetMultRespDefByIndex@12" _
     '                           (ByVal handle As Integer, ByVal iSet As Integer, ByVal *ppSet As String) As Integer
-    Public Declare PtrSafe Function spssGetMultRespDefs Lib "spssio64.dll" _
+    Public Declare Function spssGetMultRespDefs Lib "spssio32.dll" Alias "spssGetMultRespDefs@8" _
                                 (ByVal handle As Integer, ByRef pMrespDefs As Integer) As Integer
-    Public Declare PtrSafe Function spssGetMultRespDefsEx Lib "spssio64.dll" _
+    Public Declare Function spssGetMultRespDefsEx Lib "spssio32.dll" Alias "spssGetMultRespDefsEx@8" _
                                 (ByVal handle As Integer, ByRef pMrespDefs As Integer) As Integer
-    Public Declare PtrSafe Function spssGetNumberofCases Lib "spssio64.dll" _
-                                (ByVal handle As Integer, ByRef caseCount As Long) As Integer
-    Public Declare PtrSafe Function spssGetNumberofVariables Lib "spssio64.dll" _
-                                (ByVal handle As Integer, ByRef numVars As Long) As Integer
-    Public Declare PtrSafe Function spssGetReleaseInfo Lib "spssio64.dll" _
+    Public Declare Function spssGetNumberofCases Lib "spssio32.dll" Alias "spssGetNumberofCases@8" _
+                                (ByVal handle As Integer, ByRef caseCount As Integer) As Integer
+    Public Declare Function spssGetNumberofVariables Lib "spssio32.dll" Alias "spssGetNumberofVariables@8" _
+                                (ByVal handle As Integer, ByRef numVars As Integer) As Integer
+    Public Declare Function spssGetReleaseInfo Lib "spssio32.dll" Alias "spssGetReleaseInfo@8" _
                                 (ByVal handle As Integer, ByRef relInfo As Integer) As Integer
-    Public Declare PtrSafe Function spssGetSystemString Lib "spssio64.dll" _
+    Public Declare Function spssGetSystemString Lib "spssio32.dll" Alias "spssGetSystemString@8" _
                                 (ByVal handle As Integer, ByVal sysName As String) As Integer
-    Public Declare PtrSafe Function spssGetTextInfo Lib "spssio64.dll" _
+    Public Declare Function spssGetTextInfo Lib "spssio32.dll" Alias "spssGetTextInfo@8" _
                                 (ByVal handle As Integer, ByVal textInfo As String) As Integer
-    Public Declare PtrSafe Function spssGetTimeStamp Lib "spssio64.dll" _
+    Public Declare Function spssGetTimeStamp Lib "spssio32.dll" Alias "spssGetTimeStamp@12" _
                                 (ByVal handle As Integer, ByVal fileDate As String, ByVal fileTime As String) As Integer
-    Public Declare PtrSafe Function spssGetValueChar Lib "spssio64.dll" _
+    Public Declare Function spssGetValueChar Lib "spssio32.dll" Alias "spssGetValueChar@20" _
                                 (ByVal handle As Integer, ByVal varHandle As Double, ByVal value As String, ByVal valueSize As Integer) As Integer
-    Public Declare PtrSafe Function spssGetValueNumeric Lib "spssio64.dll" _
+    Public Declare Function spssGetValueNumeric Lib "spssio32.dll" Alias "spssGetValueNumeric@16" _
                                 (ByVal handle As Integer, ByVal varHandle As Double, ByRef value As Double) As Integer
-    Public Declare PtrSafe Function spssGetVarAlignment Lib "spssio64.dll" _
+    Public Declare Function spssGetVarAlignment Lib "spssio32.dll" Alias "spssGetVarAlignment@12" _
                                 (ByVal handle As Integer, ByVal varName As String, ByRef alignment As Integer) As Integer
-    ' Public Declare PtrSafe Function   spssGetVarAttributes Lib "spssio64.dll" Alias "spssGetVarAttributes" _
+    ' Public Declare Function   spssGetVarAttributes Lib "spssio32.dll" Alias "spssGetVarAttributes@20" _
     '                           (ByVal handle As Integer, ByVal varName As String, ByVal **attribNames As String, ByVal **attribText As String, ByRef nAttributes As Integer) As Integer
-    Public Declare PtrSafe Function spssGetVarCMissingValues Lib "spssio64.dll" _
+    Public Declare Function spssGetVarCMissingValues Lib "spssio32.dll" Alias "spssGetVarCMissingValues@24" _
                                 (ByVal handle As Integer, ByVal varName As String, ByRef missingFormat As Integer, ByVal missingVal1 As String, ByVal missingVal2 As String, ByVal missingVal3 As String) As Integer
-    Public Declare PtrSafe Function spssGetVarColumnWidth Lib "spssio64.dll" _
+    Public Declare Function spssGetVarColumnWidth Lib "spssio32.dll" Alias "spssGetVarColumnWidth@12" _
                                 (ByVal handle As Integer, ByVal varName As String, ByRef columnWidth As Integer) As Integer
-    Public Declare PtrSafe Function spssGetVarCompatName Lib "spssio64.dll" _
+    Public Declare Function spssGetVarCompatName Lib "spssio32.dll" Alias "spssGetVarCompatName@12" _
                                 (ByVal handle As Integer, ByVal longName As String, ByVal shortName As String) As Integer
-    Public Declare PtrSafe Function spssGetVarCValueLabel Lib "spssio64.dll" _
+    Public Declare Function spssGetVarCValueLabel Lib "spssio32.dll" Alias "spssGetVarCValueLabel@16" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal value As String, ByVal label As String) As Integer
-    Public Declare PtrSafe Function spssGetVarCValueLabelLong Lib "spssio64.dll" _
+    Public Declare Function spssGetVarCValueLabelLong Lib "spssio32.dll" Alias "spssGetVarCValueLabelLong@24" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal value As String, ByVal labelBuff As String, ByVal lenBuff As Integer, ByRef lenLabel As Integer) As Integer
-    ' Public Declare PtrSafe Function   spssGetVarCValueLabels Lib "spssio64.dll" Alias "spssGetVarCValueLabels" _
+    ' Public Declare Function   spssGetVarCValueLabels Lib "spssio32.dll" Alias "spssGetVarCValueLabels@20" _
     '                           (ByVal handle As Integer, ByVal varName As String, ByVal **values As String, ByVal **labels As String, ByRef numofLabels As Integer) As Integer
-    Public Declare PtrSafe Function spssGetVarHandle Lib "spssio64.dll" _
+    Public Declare Function spssGetVarHandle Lib "spssio32.dll" Alias "spssGetVarHandle@12" _
                                 (ByVal handle As Integer, ByVal varName As String, ByRef varHandle As Double) As Integer
-    Public Declare PtrSafe Function spssGetVariableSets Lib "spssio64.dll" _
+    Public Declare Function spssGetVariableSets Lib "spssio32.dll" Alias "spssGetVariableSets@8" _
                                 (ByVal handle As Integer, ByRef pVarSets As Integer) As Integer
-    Public Declare PtrSafe Function spssGetVarInfo Lib "spssio64.dll" _
-                                (ByVal handle As Integer, ByVal iVar As Integer, ByVal varName As String, ByRef varType As Long) As Integer
-    Public Declare PtrSafe Function spssGetVarLabel Lib "spssio64.dll" _
+    Public Declare Function spssGetVarInfo Lib "spssio32.dll" Alias "spssGetVarInfo@16" _
+                                (ByVal handle As Integer, ByVal iVar As Integer, ByVal varName As String, ByRef varType As Integer) As Integer
+    Public Declare Function spssGetVarLabel Lib "spssio32.dll" Alias "spssGetVarLabel@12" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal varLabel As String) As Integer
-    Public Declare PtrSafe Function spssGetVarLabelLong Lib "spssio64.dll" _
+    Public Declare Function spssGetVarLabelLong Lib "spssio32.dll" Alias "spssGetVarLabelLong@20" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal labelBuff As String, ByVal lenBuff As Integer, ByRef lenLabel As Integer) As Integer
-    Public Declare PtrSafe Function spssGetVarMeasureLevel Lib "spssio64.dll" _
+    Public Declare Function spssGetVarMeasureLevel Lib "spssio32.dll" Alias "spssGetVarMeasureLevel@12" _
                                 (ByVal handle As Integer, ByVal varName As String, ByRef measureLevel As Integer) As Integer
-    Public Declare PtrSafe Function spssGetVarRole Lib "spssio64.dll" _
+    Public Declare Function spssGetVarRole Lib "spssio32.dll" Alias "spssGetVarRole@12" _
                             (ByVal handle As Integer, ByVal varName As String, ByRef varRole As Integer) As Integer
-    ' Public Declare PtrSafe Function   spssGetVarNames Lib "spssio64.dll" Alias "spssGetVarNames" _
+    ' Public Declare Function   spssGetVarNames Lib "spssio32.dll" Alias "spssGetVarNames@16" _
     '                           (ByVal handle As Integer, ByRef numVars As Integer, ByRef **varNames As String, ByRef *varTypes As Integer) As Integer
-    Public Declare PtrSafe Function spssGetVarNMissingValues Lib "spssio64.dll" _
+    Public Declare Function spssGetVarNMissingValues Lib "spssio32.dll" Alias "spssGetVarNMissingValues@24" _
                                 (ByVal handle As Integer, ByVal varName As String, ByRef missingFormat As Integer, ByRef missingVal1 As Double, ByRef missingVal2 As Double, ByRef missingVal3 As Double) As Integer
-    Public Declare PtrSafe Function spssGetVarNValueLabel Lib "spssio64.dll" _
+    Public Declare Function spssGetVarNValueLabel Lib "spssio32.dll" Alias "spssGetVarNValueLabel@20" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal value As Double, ByVal label As String) As Integer
-    Public Declare PtrSafe Function spssGetVarNValueLabelLong Lib "spssio64.dll" _
+    Public Declare Function spssGetVarNValueLabelLong Lib "spssio32.dll" Alias "spssGetVarNValueLabelLong@28" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal value As Double, ByVal labelBuff As String, ByVal lenBuff As Integer, ByRef lenLabel As Integer) As Integer
-    ' Public Declare PtrSafe Function   spssGetVarNValueLabels Lib "spssio64.dll" Alias "spssGetVarNValueLabels" _
+    ' Public Declare Function   spssGetVarNValueLabels Lib "spssio32.dll" Alias "spssGetVarNValueLabels@20" _
     '                           (ByVal handle As Integer, ByVal varName As String, ByRef *values As Double, ByVal **labels As String, ByRef numofLabels As Integer) As Integer
-    Public Declare PtrSafe Function spssGetVarPrintFormat Lib "spssio64.dll" _
+    Public Declare Function spssGetVarPrintFormat Lib "spssio32.dll" Alias "spssGetVarPrintFormat@20" _
                                 (ByVal handle As Integer, ByVal varName As String, ByRef printType As Integer, ByRef printDec As Integer, ByRef printWidth As Integer) As Integer
-    Public Declare PtrSafe Function spssGetVarWriteFormat Lib "spssio64.dll" _
+    Public Declare Function spssGetVarWriteFormat Lib "spssio32.dll" Alias "spssGetVarWriteFormat@20" _
                                 (ByVal handle As Integer, ByVal varName As String, ByRef writeType As Integer, ByRef writeDec As Integer, ByRef writeWidth As Integer) As Integer
-    Public Declare PtrSafe Sub spssHostSysmisVal Lib "spssio64.dll" _
+    Public Declare Sub spssHostSysmisVal Lib "spssio32.dll" Alias "spssHostSysmisVal@4" _
                                 (ByRef missVal As Double)
-    Public Declare PtrSafe Function spssIsCompatibleEncoding Lib "spssio64.dll" _
+    Public Declare Function spssIsCompatibleEncoding Lib "spssio32.dll" Alias "spssIsCompatibleEncoding@8" _
                                 (ByVal handle As Integer, ByRef bCompatible As Integer) As Integer
-    Public Declare PtrSafe Sub spssLowHighVal Lib "spssio64.dll" _
+    Public Declare Sub spssLowHighVal Lib "spssio32.dll" Alias "spssLowHighVal@8" _
                                 (ByRef lowest As Double, ByRef highest As Double)
-    Public Declare PtrSafe Function spssOpenAppend Lib "spssio64.dll" _
+    Public Declare Function spssOpenAppend Lib "spssio32.dll" Alias "spssOpenAppend@8" _
                                 (ByVal fileName As String, ByRef handle As Integer) As Integer
-    Public Declare PtrSafe Function spssOpenAppendEx Lib "spssio64.dll" _
+    Public Declare Function spssOpenAppendEx Lib "spssio32.dll" Alias "spssOpenAppendEx@12" _
                                 (ByVal fileName As String, ByVal password As String, ByRef handle As Integer) As Integer
-    Public Declare PtrSafe Function spssOpenRead Lib "spssio64.dll" _
+    Public Declare Function spssOpenRead Lib "spssio32.dll" Alias "spssOpenRead@8" _
                                 (ByVal fileName As String, ByRef handle As Integer) As Integer
-    Public Declare PtrSafe Function spssOpenReadEx Lib "spssio64.dll" _
+    Public Declare Function spssOpenReadEx Lib "spssio32.dll" Alias "spssOpenReadEx@12" _
                                 (ByVal fileName As String, ByVal password As String, ByRef handle As Integer) As Integer
-    Public Declare PtrSafe Function spssOpenWrite Lib "spssio64.dll" _
+    Public Declare Function spssOpenWrite Lib "spssio32.dll" Alias "spssOpenWrite@8" _
                                 (ByVal fileName As String, ByRef handle As Integer) As Integer
-    Public Declare PtrSafe Function spssOpenWriteEx Lib "spssio64.dll" _
+    Public Declare Function spssOpenWriteEx Lib "spssio32.dll" Alias "spssOpenWriteEx@12" _
                                 (ByVal fileName As String, ByVal password As String, ByRef handle As Integer) As Integer
-    Public Declare PtrSafe Function spssOpenWriteCopy Lib "spssio64.dll" _
+    Public Declare Function spssOpenWriteCopy Lib "spssio32.dll" Alias "spssOpenWriteCopy@12" _
                                 (ByVal fileName As String, ByVal dictFileName As String, ByRef handle As Integer) As Integer
-    Public Declare PtrSafe Function spssOpenWriteCopyEx Lib "spssio64.dll" _
+    Public Declare Function spssOpenWriteCopyEx Lib "spssio32.dll" Alias "spssOpenWriteCopyEx@20" _
                                 (ByVal fileName As String, ByVal password As String, ByVal dictFileName As String, ByVal dictPassword As String, ByRef handle As Integer) As Integer
-    Public Declare PtrSafe Function spssOpenWriteCopyExFile Lib "spssio64.dll" _
+    Public Declare Function spssOpenWriteCopyExFile Lib "spssio32.dll" Alias "spssOpenWriteCopyExFile@16" _
                                 (ByVal fileName As String, ByVal password As String, ByVal dictFileName As String, ByRef handle As Integer) As Integer
-    Public Declare PtrSafe Function spssOpenWriteCopyExDict Lib "spssio64.dll" _
+    Public Declare Function spssOpenWriteCopyExDict Lib "spssio32.dll" Alias "spssOpenWriteCopyExDict@16" _
                                 (ByVal fileName As String, ByVal dictFileName As String, ByVal dictPassword As String, ByRef handle As Integer) As Integer
-    Public Declare PtrSafe Function spssQueryType7 Lib "spssio64.dll" _
+    Public Declare Function spssQueryType7 Lib "spssio32.dll" Alias "spssQueryType7@12" _
                                 (ByVal fromHandle As Integer, ByVal subType As Integer, ByRef bFound As Integer) As Integer
-    Public Declare PtrSafe Function spssReadCaseRecord Lib "spssio64.dll" _
+    Public Declare Function spssReadCaseRecord Lib "spssio32.dll" Alias "spssReadCaseRecord@4" _
                                 (ByVal handle As Integer) As Integer
-    Public Declare PtrSafe Function spssSeekNextCase Lib "spssio64.dll" _
+    Public Declare Function spssSeekNextCase Lib "spssio32.dll" Alias "spssSeekNextCase@8" _
                                 (ByVal handle As Integer, ByVal caseNumber As Integer) As Integer
-    Public Declare PtrSafe Function spssSetCaseWeightVar Lib "spssio64.dll" _
+    Public Declare Function spssSetCaseWeightVar Lib "spssio32.dll" Alias "spssSetCaseWeightVar@8" _
                                 (ByVal handle As Integer, ByVal varName As String) As Integer
-    Public Declare PtrSafe Function spssSetCompression Lib "spssio64.dll" _
+    Public Declare Function spssSetCompression Lib "spssio32.dll" Alias "spssSetCompression@8" _
                                 (ByVal handle As Integer, ByVal compSwitch As Integer) As Integer
-    Public Declare PtrSafe Function spssSetDateVariables Lib "spssio64.dll" _
+    Public Declare Function spssSetDateVariables Lib "spssio32.dll" Alias "spssSetDateVariables@12" _
                                 (ByVal handle As Integer, ByVal numofElements As Integer, ByRef dateInfo As Integer) As Integer
-    Public Declare PtrSafe Function spssSetDEWFirst Lib "spssio64.dll" _
+    Public Declare Function spssSetDEWFirst Lib "spssio32.dll" Alias "spssSetDEWFirst@12" _
                                 (ByVal handle As Integer, ByVal Data As String, ByVal nBytes As Integer) As Integer
-    Public Declare PtrSafe Function spssSetDEWGUID Lib "spssio64.dll" _
+    Public Declare Function spssSetDEWGUID Lib "spssio32.dll" Alias "spssSetDEWGUID@8" _
                                 (ByVal handle As Integer, ByVal asciiGUID As String) As Integer
-    Public Declare PtrSafe Function spssSetDEWNext Lib "spssio64.dll" Alias "spssSetDEWNext12" _
+    Public Declare Function spssSetDEWNext Lib "spssio32.dll" Alias "spssSetDEWNext12" _
                                 (ByVal handle As Integer, ByVal Data As String, ByVal nBytes As Integer) As Integer
-    ' Public Declare PtrSafe Function   spssSetFileAttributes Lib "spssio64.dll" Alias "spssSetFileAttributes" _
+    ' Public Declare Function   spssSetFileAttributes Lib "spssio32.dll" Alias "spssSetFileAttributes@16" _
     '                           (ByVal handle As Integer, ByVal *attribNames As String, ByVal *attribText As String, ByVal nAttributes As Integer) As Integer
-    Public Declare PtrSafe Function spssSetIdString Lib "spssio64.dll" _
+    Public Declare Function spssSetIdString Lib "spssio32.dll" Alias "spssSetIdString@8" _
                                 (ByVal handle As Integer, ByVal id As String) As Integer
-    Public Declare PtrSafe Function spssSetInterfaceEncoding Lib "spssio64.dll" _
+    Public Declare Function spssSetInterfaceEncoding Lib "spssio32.dll" Alias "spssSetInterfaceEncoding@4" _
                                 (ByVal iEncoding As Integer) As Integer
-    ' Public Declare PtrSafe Function   spssSetLocale Lib "spssio64.dll" Alias "spssSetLocale" _
+    ' Public Declare Function   spssSetLocale Lib "spssio32.dll" Alias "spssSetLocale@8" _
     '                           (ByVal iCategory As Integer, ByVal szLocale As String) As String
-    Public Declare PtrSafe Function spssSetMultRespDefs Lib "spssio64.dll" _
+    Public Declare Function spssSetMultRespDefs Lib "spssio32.dll" Alias "spssSetMultRespDefs@8" _
                                 (ByVal handle As Integer, ByVal mrespDefs As String) As Integer
-    Public Declare PtrSafe Function spssSetTempDir Lib "spssio64.dll" _
+    Public Declare Function spssSetTempDir Lib "spssio32.dll" Alias "spssSetTempDir@4" _
                                 (ByVal dirName As String) As Integer
-    Public Declare PtrSafe Function spssSetTextInfo Lib "spssio64.dll" _
+    Public Declare Function spssSetTextInfo Lib "spssio32.dll" Alias "spssSetTextInfo@8" _
                                 (ByVal handle As Integer, ByVal textInfo As String) As Integer
-    Public Declare PtrSafe Function spssSetValueChar Lib "spssio64.dll" _
+    Public Declare Function spssSetValueChar Lib "spssio32.dll" Alias "spssSetValueChar@16" _
                                 (ByVal handle As Integer, ByVal varHandle As Double, ByVal value As String) As Integer
-    Public Declare PtrSafe Function spssSetValueNumeric Lib "spssio64.dll" _
+    Public Declare Function spssSetValueNumeric Lib "spssio32.dll" Alias "spssSetValueNumeric@20" _
                                 (ByVal handle As Integer, ByVal varHandle As Double, ByVal value As Double) As Integer
-    Public Declare PtrSafe Function spssSetVarAlignment Lib "spssio64.dll" _
+    Public Declare Function spssSetVarAlignment Lib "spssio32.dll" Alias "spssSetVarAlignment@12" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal alignment As Integer) As Integer
-    ' Public Declare PtrSafe Function   spssSetVarAttributes Lib "spssio64.dll" Alias "spssSetVarAttributes" _
+    ' Public Declare Function   spssSetVarAttributes Lib "spssio32.dll" Alias "spssSetVarAttributes@20" _
     '                           (ByVal handle As Integer, ByVal varName As String, ByVal *attribNames As String, ByVal *attribText As String, ByVal nAttributes As Integer) As Integer
-    Public Declare PtrSafe Function spssSetVarCMissingValues Lib "spssio64.dll" _
+    Public Declare Function spssSetVarCMissingValues Lib "spssio32.dll" Alias "spssSetVarCMissingValues@24" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal missingFormat As Integer, ByVal missingVal1 As String, ByVal missingVal2 As String, ByVal missingVal3 As String) As Integer
-    Public Declare PtrSafe Function spssSetVarColumnWidth Lib "spssio64.dll" _
+    Public Declare Function spssSetVarColumnWidth Lib "spssio32.dll" Alias "spssSetVarColumnWidth@12" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal columnWidth As Integer) As Integer
-    Public Declare PtrSafe Function spssSetVarCValueLabel Lib "spssio64.dll" _
+    Public Declare Function spssSetVarCValueLabel Lib "spssio32.dll" Alias "spssSetVarCValueLabel@16" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal value As String, ByVal label As String) As Integer
-    ' Public Declare PtrSafe Function   spssSetVarCValueLabels Lib "spssio64.dll" Alias "spssSetVarCValueLabels" _
+    ' Public Declare Function   spssSetVarCValueLabels Lib "spssio32.dll" Alias "spssSetVarCValueLabels@20" _
     '                           (ByVal handle As Integer, ByVal *varNames As String, ByVal numofVars As Integer, ByVal *values As String, ByVal *labels As String, ByVal numofLabels As Integer) As Integer
-    Public Declare PtrSafe Function spssSetVariableSets Lib "spssio64.dll" _
+    Public Declare Function spssSetVariableSets Lib "spssio32.dll" Alias "spssSetVariableSets@8" _
                                 (ByVal handle As Integer, ByVal varSets As String) As Integer
-    Public Declare PtrSafe Function spssSetVarLabel Lib "spssio64.dll" _
+    Public Declare Function spssSetVarLabel Lib "spssio32.dll" Alias "spssSetVarLabel@12" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal varLabel As String) As Integer
-    Public Declare PtrSafe Function spssSetVarMeasureLevel Lib "spssio64.dll" _
+    Public Declare Function spssSetVarMeasureLevel Lib "spssio32.dll" Alias "spssSetVarMeasureLevel@12" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal measureLevel As Integer) As Integer
-    Public Declare PtrSafe Function spssSetVarRole Lib "spssio64.dll" _
+    Public Declare Function spssSetVarRole Lib "spssio32.dll" Alias "spssSetVarRole@12" _
                             (ByVal handle As Integer, ByVal varName As String, ByVal varRole As Integer) As Integer
-    Public Declare PtrSafe Function spssSetVarName Lib "spssio64.dll" _
+    Public Declare Function spssSetVarName Lib "spssio32.dll" Alias "spssSetVarName@12" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal varType As Integer) As Integer
-    Public Declare PtrSafe Function spssSetVarNMissingValues Lib "spssio64.dll" _
+    Public Declare Function spssSetVarNMissingValues Lib "spssio32.dll" Alias "spssSetVarNMissingValues@36" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal missingFormat As Integer, ByVal missingVal1 As Double, ByVal missingVal2 As Double, ByVal missingVal3 As Double) As Integer
-    Public Declare PtrSafe Function spssSetVarNValueLabel Lib "spssio64.dll" _
+    Public Declare Function spssSetVarNValueLabel Lib "spssio32.dll" Alias "spssSetVarNValueLabel@20" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal value As Double, ByVal label As String) As Integer
-    ' Public Declare PtrSafe Function   spssSetVarNValueLabels Lib "spssio64.dll" Alias "spssSetVarNValueLabels" _
+    ' Public Declare Function   spssSetVarNValueLabels Lib "spssio32.dll" Alias "spssSetVarNValueLabels@24" _
     '                           (ByVal handle As Integer, ByVal *varNames As String, ByVal numofVars As Integer, ByRef values As Double, ByVal *labels As String, ByVal numofLabels As Integer) As Integer
-    Public Declare PtrSafe Function spssSetVarPrintFormat Lib "spssio64.dll" _
+    Public Declare Function spssSetVarPrintFormat Lib "spssio32.dll" Alias "spssSetVarPrintFormat@20" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal printType As Integer, ByVal printDec As Integer, ByVal printWidth As Integer) As Integer
-    Public Declare PtrSafe Function spssSetVarWriteFormat Lib "spssio64.dll" _
+    Public Declare Function spssSetVarWriteFormat Lib "spssio32.dll" Alias "spssSetVarWriteFormat@20" _
                                 (ByVal handle As Integer, ByVal varName As String, ByVal writeType As Integer, ByVal writeDec As Integer, ByVal writeWidth As Integer) As Integer
-    Public Declare PtrSafe Function spssSysmisVal Lib "spssio64.dll" _
+    Public Declare Function spssSysmisVal Lib "spssio32.dll" Alias "spssSysmisVal@0" _
                                 () As Double
-    Public Declare PtrSafe Function spssValidateVarname Lib "spssio64.dll" _
+    Public Declare Function spssValidateVarname Lib "spssio32.dll" Alias "spssValidateVarname@4" _
                                 (ByVal varName As String) As Integer
-    Public Declare PtrSafe Function spssWholeCaseIn Lib "spssio64.dll" _
+    Public Declare Function spssWholeCaseIn Lib "spssio32.dll" Alias "spssWholeCaseIn@8" _
                                 (ByVal handle As Integer, ByRef caseRec As Double) As Integer
-    Public Declare PtrSafe Function spssWholeCaseOut Lib "spssio64.dll" _
+    Public Declare Function spssWholeCaseOut Lib "spssio32.dll" Alias "spssWholeCaseOut@8" _
                                 (ByVal handle As Integer, ByRef caseRec As Double) As Integer
 End Module
 

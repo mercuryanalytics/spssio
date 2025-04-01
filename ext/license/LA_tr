@@ -3,9 +3,13 @@ LİSANS BİLGİLERİ
 Aşağıda listelenen programlar, daha önce Müşteri ve IBM tarafından kabul edilen Program lisansı koşullarına ek olarak aşağıdaki Lisans Bilgilerinin kayıt ve koşulları kapsamında lisanslanır. Müşteri, Programa ilişkin yürürlükte olan lisans koşullarını daha önce kabul etmemişse, Garanti Verilmeyen Programlar İçin Uluslararası Lisans Sözleşmesi (Z125-5589-05) geçerli olur.
 
 Program Adı (Program Numarası):
-IBM I/O Modules for IBM SPSS Statistics Data Files 25.0 (Tool)
+IBM I/O Modules for IBM SPSS Statistics Data Files 27.0 (Tool)
 
 Aşağıdaki standart koşullar, Lisans Alan Tarafın Programı kullanımı için geçerlidir.
+
+Yasaklanmış Kullanımlar
+
+Programda çıkacak herhangi bir hatanın ölüme, bedensel yaralanmaya veya mallara veya çevresel hasara yol açabilecek olması durumunda Lisans Alan Taraf Programı kullanamaz veya başkalarının kullanması için yetki veremez.
 
 Geliştirme Aracı
 
@@ -72,9 +76,9 @@ Bu Program, Yeniden Dağıtılabilenler olarak adlandırılan bileşenleri içer
 
 11. Lisans Alan Taraf, Uygulamasının son kullanıcısı ile gerçekleştireceği lisans sözleşmesinde, bu Yeniden Dağıtılabilenlerin veya bunlardaki değişikliklerin, i) Uygulamasının geçerli kılınması dışında bir amaçla kullanılamayacağı, ii) kopyalanamayacağı (yedekleme amacı dışında), iii) Lisans Alan Tarafın Uygulamasından ayrı olarak başkalarına dağıtılamayacağı veya devredilemeyeceği ya da iv) geçerli yasaların sözleşme ile değiştirilmesine olanak tanımayarak açıkça izin verdiği durumlar dışında, ters çevrilemeyeceği, ters derlenemeyeceği veya başka bir yolla çevrilemeyeceği konusunda son kullanıcıyı önceden bilgilendirecektir. Ayrıca, Lisans Alan Tarafın lisans sözleşmesindeki koşulların, IBM açısından, en az bu Sözleşmede yer alan koşullar kadar koruyucu olması gereklidir. 
 
-L/N:  L-CVIS-ANR8E5
-D/N:  L-CVIS-ANR8E5
-P/N:  L-CVIS-ANR8E5
+L/N:  L-CZAA-BKKMWM
+D/N:  L-CZAA-BKKMWM
+P/N:  L-CZAA-BKKMWM
 
 
 Garanti Verilmeyen Programlar İçin Uluslararası Lisans Sözleşmesi

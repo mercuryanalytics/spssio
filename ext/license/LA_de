@@ -3,9 +3,13 @@ LIZENZINFORMATION
 Für die Lizenzierung der nachstehend aufgelisteten Programme gelten zusätzlich zu den bereits zwischen dem Kunden und IBM vereinbarten Programmlizenzbedingungen die Bedingungen der folgenden Lizenzinformation. Falls der Kunde den für das Programm geltenden Lizenzbedingungen nicht bereits zugestimmt hat, kommt Internationale Nutzungsbedingungen für Programme ohne Gewährleistung (Z125-5589-05) zur Anwendung.
 
 Programmname (Programmnummer):
-IBM I/O Modules for IBM SPSS Statistics Data Files 25.0 (Tool)
+IBM I/O Modules for IBM SPSS Statistics Data Files 27.0 (Tool)
 
 Die folgenden Standardbedingungen gelten für die Programmnutzung durch den Lizenznehmer.
+
+Untersagte Nutzungen
+
+Der Lizenznehmer darf das Programm nicht nutzen oder Dritten die Berechtigung zur Nutzung des Programms erteilen, wenn ein Versagen des Programms zu Todesfällen, Personenschäden, Sach- oder Umweltschäden führen kann.
 
 Entwicklungstool
 
@@ -72,9 +76,9 @@ Wenn das Programm weiterverteilbare Komponenten (sog. Redistributables) enthält
 
 11. In der Lizenzvereinbarung des Lizenznehmers mit dem Endbenutzer seiner Anwendung muss ein Hinweis enthalten sein, dass die Redistributables oder die davon erstellten Bearbeitungen i) nur zur Aktivierung seiner Anwendung verwendet werden dürfen, ii) nicht kopiert werden dürfen (außer für Sicherungszwecke), iii) nicht ohne seine Anwendung weitergegeben oder übertragen werden dürfen und iv) nicht rückumgewandelt (reverse assemble, reverse compile) oder in anderer Weise übersetzt werden dürfen, soweit nicht durch gesetzliche Regelung etwas anderes zwingend vorgeschrieben ist. Darüber hinaus muss die Lizenzvereinbarung des Lizenznehmers die Rechte von IBM in mindestens demselben Maße schützen, wie sie durch die Bedingungen dieser Vereinbarung geschützt werden. 
 
-L/N:  L-CVIS-ANR8E5
-D/N:  L-CVIS-ANR8E5
-P/N:  L-CVIS-ANR8E5
+L/N:  L-CZAA-BKKMWM
+D/N:  L-CZAA-BKKMWM
+P/N:  L-CZAA-BKKMWM
 
 
 Internationale Nutzungsbedingungen für Programme ohne Gewährleistung

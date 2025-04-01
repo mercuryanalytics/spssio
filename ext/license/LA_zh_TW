@@ -3,9 +3,13 @@
 下列本程式之授權除係依客戶與 IBM 先前同意之授權條款外，並依下述授權手冊條款授權。若客戶先前就本程式未同意生效任何授權條款，則本程式適用 國際授權合約 - 無保證程式 (Z125-5589-05)。
 
 程式名稱 (程式編號)：
-IBM I/O Modules for IBM SPSS Statistics Data Files 25.0 (Tool)
+IBM I/O Modules for IBM SPSS Statistics Data Files 27.0 (Tool)
 
 下列標準條款適用於被授權人對本程式之使用。
+
+禁止之使用
+
+若「本程式」失效可能導致死亡、人身傷害，或財產或環境損害者，被授權人不得使用「本程式」。
 
 開發工具
 
@@ -72,9 +76,9 @@ Microsoft Visual Studio 條款
 
 11. 於被授權人與被授權人應用程式使用者所訂授權合約中，被授權人應告知該使用者可再散布軟體或其修改項目 i) 不得用於啟用被授權人應用程式以外之用途；ii) 不得複製（但用於備份者不在此限）；iii) 僅限搭配被授權人應用程式方得再散布或再轉讓；或 iv) 不得逆向組合、逆向編纂或以其他方法解譯，但法律特別規定不得以契約限制者，不在此限。此外，被授權人之授權合約對 IBM 之保護，至少應與本合約之條款相同。
 
-L/N:  L-CVIS-ANR8E5
-D/N:  L-CVIS-ANR8E5
-P/N:  L-CVIS-ANR8E5
+L/N:  L-CZAA-BKKMWM
+D/N:  L-CZAA-BKKMWM
+P/N:  L-CZAA-BKKMWM
 
 
 國際授權合約 - 無保證程式

@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
-source 'https://rubygems.org'
+source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.3'
-
-gem 'ffi'
+gem "ffi"
 
 group :development do
-  gem 'rake'
-  gem 'pry'
-  gem 'rb-readline'
-  gem 'rspec'
+  gem "pry"
+  gem "rake"
+  gem "rb-readline"
+  gem "rspec"
+  gem "rubocop"
+  gem "rubocop-performance"
+  gem "rubocop-rspec"
 end

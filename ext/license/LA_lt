@@ -3,9 +3,13 @@ LICENCIJOS INFORMACIJA
 Toliau nurodytos Programos licencijuojamos pagal šias Licencijos informacijos sąlygas, kurios papildo Programos licencijos sąlygas, dėl kurių susitarė Klientas ir IBM. Jei Klientas anksčiau nėra sutikęs su Programai taikomomis licencijos sąlygomis, taikoma Programų kurioms neteikiama garantija tarptautinė licencinė sutartis (Z125-5589-05).
 
 Programos pavadinimas (Programos numeris):
-IBM I/O Modules for IBM SPSS Statistics Data Files 25.0 (Tool)
+IBM I/O Modules for IBM SPSS Statistics Data Files 27.0 (Tool)
 
 Šios standartinės sąlygos taikomos Licenciato Programos naudojimui.
+
+Draudžiamas naudojimas
+
+Licenciatas negali naudoti ar autorizuoti nauodoti Programą, jei jos gedimas gali sukelti mirtį, kūno sužalojimų, nuosavybės ar aplinkos pažeidimą.
 
 Kūrimo įrankis
 
@@ -72,9 +76,9 @@ Jeigu į Programą įtraukti Perskirstomieji komponentai, jie bus nurodyti REDIS
 
 11. Licenciato ir Licenciato taikomosios programos galutinio vartotojo licencijos sutartis turi įspėti galutinį vartotoją, kad Perskirstymo paketų arba jų modifikavimų negalima i) naudoti kitu tikslu, nei Licenciato taikomajai programai įgalinti, ii) kopijuoti (išskyrus kuriant atsarginę kopiją), iii) platinti ar perduoti naudoti be Licenciato taikomosios programos, arba iv) išardyti, dekompiliuoti ar kitaip versti, išskyrus, jei tai aiškiai leidžia teisės aktai ir nepažeidžiami sutartiniai įsipareigojimai. Be to, Licenciato licencinė sutartis turi būti sauganti IBM bent tiek, kiek tai apibrėžia šios Sutarties sąlygos.
 
-L/N:  L-CVIS-ANR8E5
-D/N:  L-CVIS-ANR8E5
-P/N:  L-CVIS-ANR8E5
+L/N:  L-CZAA-BKKMWM
+D/N:  L-CZAA-BKKMWM
+P/N:  L-CZAA-BKKMWM
 
 
 Programų kurioms neteikiama garantija tarptautinė licencinė sutartis

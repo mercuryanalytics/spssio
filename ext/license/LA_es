@@ -3,9 +3,13 @@ INFORMACIÓN SOBRE LICENCIA
 Los Programas que se enumeran a continuación se licencian bajo los siguientes términos y condiciones de Licencia, además de los términos de licencia del Programa acordados previamente entre el Cliente e IBM. Si el Cliente no ha aceptado con anterioridad los términos de la licencia aplicables al Programa, se aplicará Acuerdo Internacional de Licencia para Programas sin Garantía (Z125-5589-05).
 
 Nombre de Programa (Número de Programa):
-IBM I/O Modules for IBM SPSS Statistics Data Files 25.0 (Tool)
+IBM I/O Modules for IBM SPSS Statistics Data Files 27.0 (Tool)
 
 Los términos estándar siguientes se aplican al uso por parte del Licenciatario del Programa.
+
+Usos prohibidos
+
+El Licenciatario no puede utilizar ni autorizar a terceros para utilizar el Programa si un fallo del Programa puede producir la muerte, daños corporales o daños a la propiedad o al medio ambiente.
 
 Herramienta de Desarrollo
 
@@ -72,9 +76,9 @@ Si el Programa incluye componentes que son Redistribuibles, se identificarán en
 
 11. En el acuerdo de licencia de con el usuario final de la Aplicación del Licenciatario, el Licenciatario notificará al usuario final que los Redistribuibles o sus modificaciones no pueden i) utilizarse con ninguna otra finalidad que no sea habilitar la Aplicación del Licenciatario, ii) copiarse (excepto a efectos de copia de seguridad), iii) distribuirse ni transferirse sin la Aplicación del Licenciatario o iv) desensamblarse, descompilarse ni de otro modo traducirse, excepto aquello específicamente permitido por la correspondiente legislación sin que sea posible la renuncia por contrato. Además, el acuerdo de licencia del Licenciatario deberá proteger a IBM al igual, cómo mínimo, que los términos de este Acuerdo.
 
-L/N:  L-CVIS-ANR8E5
-D/N:  L-CVIS-ANR8E5
-P/N:  L-CVIS-ANR8E5
+L/N:  L-CZAA-BKKMWM
+D/N:  L-CZAA-BKKMWM
+P/N:  L-CZAA-BKKMWM
 
 
 Acuerdo Internacional de Licencia para Programas sin Garantía

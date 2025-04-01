@@ -22,11 +22,11 @@ module SPSS
 
     begin
       ffi_lib find("libgsk8iccs")
-    rescue LoadError # rubocop:disable Lint/HandleExceptions
+    rescue LoadError # rubocop:disable Lint/SuppressedException
     end
     begin
       ffi_lib find("libgsk8iccs_64")
-    rescue LoadError # rubocop:disable Lint/HandleExceptions
+    rescue LoadError # rubocop:disable Lint/SuppressedException
     end
     ffi_lib find("libicudata")
     ffi_lib find("libicuuc")

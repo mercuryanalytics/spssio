@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
   s.name = "spssio"
   s.summary = "Ruby bindings for spssdio"
-  s.version = "0.0.1"
+  s.version = "0.0.2"
   s.author = "Scott Brickner"
   s.files = [
     "lib/spssio.rb",
@@ -17,12 +17,10 @@ Gem::Specification.new do |s|
 
   s.description = "Ruby bindings for IBM SPSS Statistics Input/Output Module"
   s.email = "scottb@brickner.net"
-  # s.homepage = ""
-  # s.license = "MIT"
-  # s.licenses = ?
-  # s.metadata = ?
-  s.date = "2019-02-05"
 
-  s.add_development_dependency "rspec", "~> 0"
-  s.add_runtime_dependency "ffi", "~> 1.0"
+  s.required_ruby_version = "2.5.3"
+
+  s.add_dependency "ffi", "~> 1.0"
+
+  s.metadata["rubygems_mfa_required"] = "true"
 end
