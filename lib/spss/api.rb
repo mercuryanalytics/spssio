@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "spssio/libspssdio"
-require "spssio/status"
+require "spss/libspssdio"
+require "spss/status"
 
 module SPSS
   module IO

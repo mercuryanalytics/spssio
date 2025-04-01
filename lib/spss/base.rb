@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "spssio/api"
+require "spss/api"
 
 module SPSS
   class Base
@@ -22,9 +22,7 @@ module SPSS
 
     def compression=(value)
       value = case value
-              when nil
-                0
-              when :none
+              when nil, :none
                 0
               when :standard
                 1

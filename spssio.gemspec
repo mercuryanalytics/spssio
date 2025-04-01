@@ -6,12 +6,11 @@ Gem::Specification.new do |s|
   s.version = "0.0.2"
   s.author = "Scott Brickner"
   s.files = [
-    "lib/spssio.rb",
     "bin/change_install_names.rb",
-    "lib/spssio/libspssdio.rb",
-    "lib/spssio/status.rb",
-    "lib/spssio/reader.rb",
-    "lib/spssio/api.rb",
+    "lib/spss/libspssdio.rb",
+    "lib/spss/status.rb",
+    "lib/spss/reader.rb",
+    "lib/spss/api.rb",
     "lib/spssio.rb"
   ] + Dir["ext/**/*"]
 

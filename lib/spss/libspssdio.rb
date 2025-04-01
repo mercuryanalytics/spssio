@@ -16,7 +16,7 @@ module SPSS
     ffi_convention :stdcall
 
     def self.find(name)
-      path = Pathname.new(__dir__).parent.parent + "ext"
+      path = "#{Pathname.new(__dir__).parent.parent}ext"
       [name, *Dir.glob("#{path}/*/#{name}.*")]
     end
 
@@ -64,6 +64,7 @@ module SPSS
       end
     end
 
+    # rubocop:disable Layout/LineLength
     attach_function :spssAddFileAttribute, %i[int string int string], :int # (const int handle, const char* attribName, const int attribSub, const char* attribText)
     attach_function :spssAddMultRespDefC, %i[int string string int string pointer int], :int # (int handle, const har* mrSetName, const char* mrSetLabel, int isDichotomy, const char* countedValue, const char** varNames, int numVars)
     attach_function :spssAddMultRespDefExt, %i[int pointer], :int # (int handle, const spssMultRespDef* pSet)
@@ -186,5 +187,6 @@ module SPSS
     attach_function :spssValidateVarname, %i[string], :int # (const char* varName)
     attach_function :spssWholeCaseIn, %i[int pointer], :int # (const int handle, char* caseRec)
     attach_function :spssWholeCaseOut, %i[int pointer], :int # (int handle, const char* caseRec)
+    # rubocop:enable Layout/LineLength
   end
 end

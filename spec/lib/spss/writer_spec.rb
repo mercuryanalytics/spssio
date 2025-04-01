@@ -12,7 +12,7 @@ RSpec.describe SPSS::Writer do
     subject.close
   end
 
-  specify do
+  specify do # rubocop:disable RSpec/ExampleLength
     subject.compression = :standard
     expect(subject.compression).to eq :standard
 

@@ -13,6 +13,12 @@ Lint/AmbiguousOperatorPrecedence:
 Metrics:
   Enabled: false
 
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 4
+
 Style/AccessorGrouping:
   EnforcedStyle: separated
 

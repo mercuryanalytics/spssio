@@ -1,19 +1,20 @@
 # frozen_string_literal: true
 
-require "spssio/api"
+require "spss/api"
 require "tempfile"
 require "csv" # TODO: remove
 
 RSpec.describe SPSS::API do
   # subject { Class.new { extend SPSS::API } }
-  subject { SPSS::API }
+  subject { described_class }
 
   it "offers access to the interface encoding" do
     expect(subject.get_interface_encoding).to be_a Numeric
   end
 
-  # NOTE: these can't be reliably called once the library has actually "done" anything so the test is currently suppressed
-  it "can set the interface encoding", :not_tested do
+  # NOTE: these can't be reliably called once the library has actually "done" anything,
+  # so the test is currently suppressed
+  it "can set the interface encoding", :aggregate_failures, :not_tested do
     expect { subject.set_interface_encoding(SPSS::ENCODING_UTF8) }.not_to raise_exception
     expect { subject.set_interface_encoding(SPSS::ENCODING_CODEPAGE) }.not_to raise_exception
   end
@@ -54,7 +55,7 @@ RSpec.describe SPSS::API do
     expect { subject.set_temp_dir(ENV.fetch("TMPDIR", nil)) }.not_to raise_exception
   end
 
-  it "can validate proposed variable names" do
+  it "can validate proposed variable names", :aggregate_failures do # rubocop:disable RSpec/ExampleLength
     expect(subject.validate_varname("gender")).to eq :ok
     expect(subject.validate_varname("#gender")).to eq :scratch
     expect(subject.validate_varname("$gender")).to eq :system
@@ -64,7 +65,7 @@ RSpec.describe SPSS::API do
     expect(subject.validate_varname("1gender")).to eq :badfirst
   end
 
-  context "opening SAV files for reading" do
+  context "when opening SAV files for reading" do
     let(:savfile) { File.join("fixtures", "MA2912GSSONE.sav") }
 
     it "opens (and closes) existing SAV files" do
@@ -80,7 +81,7 @@ RSpec.describe SPSS::API do
     end
   end
 
-  context "opening SAV files for writing" do
+  context "when opening SAV files for writing" do
     let(:savfile) { Tempfile.new("spssio") }
 
     after do
@@ -100,7 +101,7 @@ RSpec.describe SPSS::API do
     end
   end
 
-  context "opening SAV files for append" do
+  context "when opening SAV files for append" do
     let(:original) { File.join("fixtures", "MA2912GSSONE.sav") }
     let(:savfile) { Tempfile.new("spssio") }
 
@@ -125,7 +126,7 @@ RSpec.describe SPSS::API do
     end
   end
 
-  context "write copy", :not_tested do
+  context "when using write copy mode", :not_tested do
     it "can open a file in copy mode (#open_write_copy)"
     it "can handle both files needing passwords (#open_write_copy_ex)"
     it "can handle the target file needing a password (#open_write_copy_ex_file)"
@@ -135,19 +136,16 @@ RSpec.describe SPSS::API do
   it "can copy documents from one SAV file to another (#copy_documents)", :not_tested
 
   context "with a file open for reading" do
-    let(:handle) { subject.open_read(@savfile.path) }
+    let(:savfile) { Tempfile.new("spssio") }
+    let(:handle) { subject.open_read(savfile.path) }
 
-    before(:context) do
+    before do
       original = File.join("fixtures", "MA2912GSSONE.sav")
-      @savfile = Tempfile.new("spssio")
-      FileUtils.cp(original, @savfile.path)
-    end
-
-    after(:context) do
-      @savfile.unlink
+      FileUtils.cp(original, savfile.path)
     end
 
     after do
+      savfile.unlink
       subject.close_read(handle)
     end
 
@@ -199,7 +197,7 @@ RSpec.describe SPSS::API do
       expect(subject.get_mult_resp_count(handle)).to eq 8
     end
 
-    it "can get the multiple response sets" do
+    it "can get the multiple response sets" do # rubocop:disable RSpec/ExampleLength
       expect(subject.get_mult_resp_defs(handle)).to eq <<~DEFS
         $AllowedProvider=D1 1 23 Allowed Sample Provider AllowedProvider01 AllowedProvider02 AllowedProvider03 AllowedProvider04 AllowedProvider05 AllowedProvider06 AllowedProvider07 AllowedProvider08 AllowedProvider09 AllowedProvider10
         $RACE=D1 1 106 Which of the following groups best represent your ethnic background? You may select <u>all</u> that apply. RACE1 RACE2 RACE3 RACE4 RACE5 RACE6 RACE7 RACE8
@@ -212,7 +210,7 @@ RSpec.describe SPSS::API do
       DEFS
     end
 
-    it "can get the multiple-response sets for extended multiple dichotomy sets" do
+    it "can get the multiple-response sets for extended multiple dichotomy sets" do # rubocop:disable RSpec/ExampleLength
       expect(subject.get_mult_resp_defs_ex(handle)).to eq <<~DEFS
         $AllowedProvider=D1 1 23 Allowed Sample Provider AllowedProvider01 AllowedProvider02 AllowedProvider03 AllowedProvider04 AllowedProvider05 AllowedProvider06 AllowedProvider07 AllowedProvider08 AllowedProvider09 AllowedProvider10
         $RACE=D1 1 106 Which of the following groups best represent your ethnic background? You may select <u>all</u> that apply. RACE1 RACE2 RACE3 RACE4 RACE5 RACE6 RACE7 RACE8
@@ -225,10 +223,11 @@ RSpec.describe SPSS::API do
       DEFS
     end
 
-    it "can get a multiple-response def by index" do
+    it "can get a multiple-response def by index", :aggregate_failures do # rubocop:disable RSpec/ExampleLength
       defn = subject.get_mult_resp_def_by_index(handle, 2)
       expect(defn[:mr_set_name].to_s).to eq "$TODAYWATCH"
-      expect(defn[:mr_set_label].to_s).to eq "Please identify the types of TV shows you have watched today? You may select all that apply."
+      line = "Please identify the types of TV shows you have watched today? You may select all that apply."
+      expect(defn[:mr_set_label].to_s).to eq line
       expect(defn[:is_dichotomy]).to eq 1
       expect(defn[:is_numeric]).to eq 1
       expect(defn[:use_category_labels]).to eq 0
@@ -273,7 +272,7 @@ RSpec.describe SPSS::API do
       expect(subject.is_compatible_encoding(handle)).to be_truthy
     end
 
-    it "can do query type 7 operations" do
+    it "can do query type 7 operations", :aggregate_failures do # rubocop:disable RSpec/ExampleLength
       expect(subject.query_type7(handle, 3)).to be_truthy # release info
       expect(subject.query_type7(handle, 4)).to be_truthy # floating point constants including the system missing value
       expect(subject.query_type7(handle, 5)).to be_falsy # variable set definitions
@@ -281,27 +280,34 @@ RSpec.describe SPSS::API do
       expect(subject.query_type7(handle, 7)).to be_truthy # multiple-response set definitions
       expect(subject.query_type7(handle, 8)).to be_falsy # DEW information
       expect(subject.query_type7(handle, 10)).to be_falsy # TextSmart information
-      expect(subject.query_type7(handle, 11)).to be_truthy # measurement level, column with, and alignment for each variable
+      expect(subject.query_type7(handle, 11)).to be_truthy # measurement level, column with, and alignment for each var
     end
 
     it "can retrieve the variable names and types" do
       expect(subject.get_var_names(handle)).to include(["Respondent_Serial", 0], ["M2MError_Email", 1024])
     end
 
-    context "a specific (named) variable" do
+    context "with a specific (named) variable" do
       it "can read the variable info by index", :not_tested # get_var_info(handle, i_var)
       it "can read the compatible variable name" do
         expect(subject.get_var_compat_name(handle, "M2MError_Email")).to eq "V4_A"
       end
 
       it "can read the variable label" do
-        expect(subject.get_var_label(handle,
-                                     "M2MError_Email")).to eq "Thank you for your willingness to help.<p>Initially, we will contact you by email.  Again, this contact would only be fo"
+        text = [
+          "Thank you for your willingness to help.<p>Initially, we will contact you by",
+          "email.  Again, this contact would only be fo"
+        ].join(" ")
+        expect(subject.get_var_label(handle, "M2MError_Email")).to eq text
       end
 
-      it "can read the variable label (long form)" do
+      it "can read the variable label (long form)" do # rubocop:disable RSpec/ExampleLength
         # TODO: this doesn't seem to be returning the full label, but rather only the first 256 bytes
-        text = "Thank you for your willingness to help.<p>Initially, we will contact you by email.  Again, this contact would only be for the purpose of identifying the cause of the problem that was detected, and if we contact you we will pay you $25.</p>What email addres"
+        text = [
+          "Thank you for your willingness to help.<p>Initially, we will contact you by",
+          "email.  Again, this contact would only be for the purpose of identifying the",
+          "cause of the problem that was detected, and if we contact you we will pay you $25.</p>What email addres"
+        ]
         expect(subject.get_var_label_long(handle, "M2MError_Email", 1024)).to eq [256, text]
       end
 
@@ -311,10 +317,6 @@ RSpec.describe SPSS::API do
 
       it "can return a variable's alignment" do
         expect(subject.get_var_alignment(handle, "M2MError_Email")).to eq 0
-      end
-
-      it "can return a variable's column width" do
-        expect(subject.get_var_column_width(handle, "M2MError_Email")).to eq 50
       end
 
       it "can return a variable's column width" do
@@ -341,7 +343,7 @@ RSpec.describe SPSS::API do
         expect(subject.get_var_attributes(handle, "M2MError_Email")).to eq []
       end
 
-      context "character variable" do
+      context "with a character variable" do
         it "can return the missing values" do
           expect(subject.get_var_c_missing_values(handle, "M2MError_Email")).to eq []
         end
@@ -365,7 +367,7 @@ RSpec.describe SPSS::API do
         end
       end
 
-      context "numeric variable" do
+      context "with a numeric variable" do
         it "can return the missing values" do
           expect(subject.get_var_n_missing_values(handle, "TODAYWATCH1")).to eq []
         end
@@ -392,12 +394,12 @@ RSpec.describe SPSS::API do
       expect { subject.seek_next_case(handle, 3) }.not_to raise_exception
     end
 
-    context "case data" do
+    context "with case data" do
       before do
         subject.read_case_record(handle)
       end
 
-      context "character variable" do
+      context "with a character variable" do
         let(:c_var_handle) { subject.get_var_handle(handle, "M2MError_Email") }
 
         it "can retrieve the variable's value" do
@@ -405,7 +407,7 @@ RSpec.describe SPSS::API do
         end
       end
 
-      context "numeric variable" do
+      context "with a numeric variable" do
         let(:n_var_handle) { subject.get_var_handle(handle, "Respondent_Serial") }
 
         it "can retrieve the variable's value" do
@@ -454,7 +456,7 @@ RSpec.describe SPSS::API do
       expect { subject.set_id_string(handle, "My File") }.not_to raise_error
     end
 
-    it "can set the multiple response sets" do
+    it "can set the multiple response sets" do # rubocop:disable RSpec/ExampleLength
       expect { subject.set_mult_resp_defs(handle, <<~DEFS) }.not_to raise_error
         $AllowedProvider=D1 1 23 Allowed Sample Provider AllowedProvider01 AllowedProvider02 AllowedProvider03 AllowedProvider04 AllowedProvider05 AllowedProvider06 AllowedProvider07 AllowedProvider08 AllowedProvider09 AllowedProvider10
         $RACE=D1 1 106 Which of the following groups best represent your ethnic background? You may select <u>all</u> that apply. RACE1 RACE2 RACE3 RACE4 RACE5 RACE6 RACE7 RACE8
@@ -477,7 +479,7 @@ RSpec.describe SPSS::API do
     end
   end
 
-  it "can read what it writes" do
+  it "can read what it writes", :aggregate_failures do # rubocop:disable RSpec/ExampleLength
     file = Tempfile.new(["file", ".sav"])
     subject.open_write(file.path) do |handle|
       subject.set_id_string(handle, "My Sample SAV File")

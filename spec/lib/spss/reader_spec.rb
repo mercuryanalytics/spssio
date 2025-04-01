@@ -16,7 +16,7 @@ RSpec.describe SPSS::Reader do
     subject.close
   end
 
-  it "has the variable names" do
+  it "has the variable names", :aggregate_failures do
     expect(subject.variable_names.size).to eq n_vars
     expect(subject.variable_names).to include("RID", "ShowTitle", "Episode", "Genre")
   end
@@ -29,7 +29,7 @@ RSpec.describe SPSS::Reader do
     expect { |b| subject.each(&b) }.to yield_control.exactly(n_cases).times
   end
 
-  it "can return a variable handle" do
+  it "can return a variable handle", :aggregate_failures do
     expect(subject.variable_handle("RID")).to be_a Numeric
     expect(subject.variable_handle("bad_var")).to be_nil
   end
@@ -38,13 +38,14 @@ RSpec.describe SPSS::Reader do
     expect(subject.label("RID")).to eq "RID. Respondent ID"
   end
 
-  it "can return the labels for a variable's values" do
+  it "can return the labels for a variable's values", :aggregate_failures do
     expect(subject.values("RID")).to eq :no_labels
     expect(subject.values("DayOfWeek")).to include(1.0 => "Monday", 2.0 => "Tuesday", 3.0 => "Wednesday",
-                                                   4.0 => "Thursday", 5.0 => "Friday", 6.0 => "Saturday", 7.0 => "Sunday")
+                                                   4.0 => "Thursday", 5.0 => "Friday", 6.0 => "Saturday",
+                                                   7.0 => "Sunday")
   end
 
-  context "at the first record" do
+  context "when at the first record" do
     let(:enum) { subject.each }
 
     before do
@@ -59,14 +60,14 @@ RSpec.describe SPSS::Reader do
       expect(enum.next.to_a.take(4)).to eq [25_812.0, "041218", "421", "PLTBRF20"]
     end
 
-    it "can fetch variable values" do
+    it "can fetch variable values", :aggregate_failures do
       expect(subject.fetch("RID")).to eq 25_817
       expect(subject.fetch("ShowTitle")).to eq "Bright Futures"
       expect { subject.fetch("bad_var") }.to raise_error SPSS::Error, 'No such variable "bad_var"'
     end
   end
 
-  specify do
+  specify do # rubocop:disable RSpec/ExampleLength
     pending "this shouldn't create the leftover file"
     # out = Tempfile.new(["sample", ".csv"])
     CSV.open("test.csv", "wb") do |csv|
@@ -77,7 +78,7 @@ RSpec.describe SPSS::Reader do
     end
   end
 
-  specify do
+  specify do # rubocop:disable RSpec/ExampleLength
     pending "this shouldn't create the leftover file"
     CSV.open("labels.csv", "wb") do |csv|
       csv << %w[Name Code Label]
@@ -93,7 +94,9 @@ RSpec.describe SPSS::Reader do
     end
   end
 
-  xspecify "this", :not_tested do
+  specify "this", :aggregate_failures, :not_tested do # rubocop:disable RSpec/ExampleLength
+    pending "unknown"
+
     var_names = subject.variable_names
     expect(var_names).to include(["Respondent_Serial", 0], ["Location", 64], ["Weight", 0])
     var_handles = var_names.each_with_object({}) do |(name, _), obj|

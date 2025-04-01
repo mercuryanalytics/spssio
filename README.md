@@ -1,21 +1,23 @@
 # SPSSIO library for Ruby
 
-This project uses FFI to provide a Ruby interface to the IBM SPSS Statistics Input/Output Module,
-which allows reading and writing of SPSS SAV files.
+This project uses FFI to provide a Ruby interface to the IBM SPSS
+Statistics Input/Output Module, which allows reading and writing
+of SPSS SAV files.
 
-* Ruby version
+- Ruby version
 
 This code is known to run on Ruby 2.5.3, but should work on 2.0 and later.
 
 ## System dependencies
 
-The library, as provided by IBM, doesn't quite work right on MacOS. The dynamic libraries
-include internal references to each other that require them to be in fixed locations, rather than
-in the gem's folder.
+The library, as provided by IBM, doesn't quite work right on MacOS.
+The dynamic libraries include internal references to each other
+that require them to be in fixed locations, rather than in the gem's
+folder.
 
-I used the following script to "fix" those references, and it's the modified files that
-are included in `ext/macos`. Otherwise, the `ext` folder is simply a copy of the IBM-provided
-module.
+I used the following script to "fix" those references, and it's the
+modified files that are included in `ext/macos`. Otherwise, the
+`ext` folder is simply a copy of the IBM-provided module.
 
 ```
 # frozen_string_literal: true

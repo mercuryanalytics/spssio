@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "spssio/base"
+require "spss/base"
 
 module SPSS
   class Reader < Base
@@ -9,6 +9,8 @@ module SPSS
     attr_reader :variables
 
     def initialize(filename)
+      super()
+
       @variable_handles = Hash.new { |hash, key| hash[key] = allocate_var_handle(key) }
       @variables = Hash.new { |hash, key| hash[key] = Variable.new(handle, key) }
       @value_labels = Hash.new { |hash, key| hash[key] = read_value_labels(key) }
@@ -97,7 +99,7 @@ module SPSS
     end
 
     def variable_sizes
-      @variable_sizes ||= Hash[API.get_var_names(handle)]
+      @variable_sizes ||= API.get_var_names(handle).to_h
     end
 
     private
@@ -136,9 +138,9 @@ module SPSS
 
     def read_value_labels(name)
       if numeric?(name)
-        Hash[API.get_var_n_value_labels(handle, name)]
+        API.get_var_n_value_labels(handle, name).to_h
       else
-        Hash[API.get_var_c_value_labels(handle, name)]
+        API.get_var_c_value_labels(handle, name).to_h
       end
     rescue Warning => e
       raise unless e.message == "no_labels"

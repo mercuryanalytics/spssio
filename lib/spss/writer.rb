@@ -2,25 +2,6 @@
 
 require_relative "variable"
 
-# module SPSS
-#   class Writer < Base
-#     def initialize(filename)
-#       @handle = API.open_write(filename)
-#       # @variable_handles = Hash.new { |hash, key| hash[key] = allocate_var_handle(key) }
-#     end
-
-#     def close
-#       API.close_write(handle)
-#     end
-
-#     def define_variable(name, options = {})
-#       API.set_var_name(@handle, name, 0)
-#       API.set_var_label(@handle, name, options[:label]) if options.key?(:label)
-#       # return unless options.key?(:categories)
-#     end
-#   end
-# end
-
 module SPSS
   class Writer
     attr_reader :handle
