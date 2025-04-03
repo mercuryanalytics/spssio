@@ -15,9 +15,21 @@ module SPSS
 
     ffi_convention :stdcall
 
+    def self.platform
+      @platform ||= case RUBY_PLATFORM
+                    when %r{^x86_64-linux(?:-.*)?$}
+                      "lin64"
+                    when %r{^x86_64-darwin(?:-.*)?}
+                      "macos"
+                    end
+    end
+
+    def self.path
+      Pathname.new(__dir__).parent.parent.join("ext", platform) unless platform.nil?
+    end
+
     def self.find(name)
-      path = "#{Pathname.new(__dir__).parent.parent}ext"
-      [name, *Dir.glob("#{path}/*/#{name}.*")]
+      [name, *Dir.glob("#{path}/#{name}.*")]
     end
 
     begin
@@ -31,7 +43,7 @@ module SPSS
     ffi_lib find("libicudata")
     ffi_lib find("libicuuc")
     ffi_lib find("libicui18n")
-    ffi_lib find("libzlib1211spss")
+    ffi_lib find("libzlib1211spss1")
     ffi_lib find("libspssdio")
 
     module MultRespDefLayout
@@ -60,7 +72,7 @@ module SPSS
       include MultRespDefLayout
 
       def self.release(ptr)
-        Status.check! LIBSPSSDIO.spssFreeMultRespDefStruct(ptr)
+        SPSS::Status.status! LIBSPSSDIO.spssFreeMultRespDefStruct(ptr)
       end
     end
 

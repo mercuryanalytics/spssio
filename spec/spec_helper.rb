@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "support/file_fixture"
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4.
@@ -10,6 +12,8 @@ RSpec.configure do |config|
     # This will default to `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
+
+  config.include FileFixture
 
   # This option will default to `:apply_to_host_groups` in RSpec 4
   config.shared_context_metadata_behavior = :apply_to_host_groups

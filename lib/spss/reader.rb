@@ -30,7 +30,7 @@ module SPSS
     end
 
     def numeric?(name)
-      variable_sizes[name].zero?
+      variable_sizes[name] == 0
     end
 
     def missing_value

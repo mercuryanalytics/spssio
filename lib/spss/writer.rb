@@ -3,7 +3,7 @@
 require_relative "variable"
 
 module SPSS
-  class Writer
+  class Writer < Base
     attr_reader :handle
     attr_reader :variables
 
