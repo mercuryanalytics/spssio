@@ -7,6 +7,7 @@ gem "ffi"
 
 group :development do
   gem "pry"
+  gem "pry-byebug"
   gem "rake"
   gem "rb-readline"
   gem "rspec"
