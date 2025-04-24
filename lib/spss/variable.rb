@@ -10,7 +10,7 @@ module SPSS
       @name = name
     end
 
-    def alignment(name)
+    def alignment
       API.get_var_alignment(handle, name)
     end
 
@@ -18,7 +18,7 @@ module SPSS
       API.set_var_alignment(handle, name, value)
     end
 
-    def attributes(name)
+    def attributes
       API.get_var_attributes(handle, name)
     end
 
@@ -26,7 +26,7 @@ module SPSS
       API.set_var_attributes(handle, name, value)
     end
 
-    def column_width(name)
+    def column_width
       API.get_var_column_width(handle, name)
     end
 
@@ -34,7 +34,7 @@ module SPSS
       API.set_var_column_width(handle, name, value)
     end
 
-    def label(name)
+    def label
       API.get_var_label(handle, name)
     end
 
@@ -42,15 +42,16 @@ module SPSS
       API.set_var_label(handle, name, value)
     end
 
-    def measure_level(name)
+    def measure_level
       API.get_var_measure_level(handle, name)
+      # one of SPSS_MLVL_NOM, SPSS_MLVL_ORD, or SPSS_MLVL_RAT
     end
 
     def measure_level=(value)
       API.set_var_measure_level(handle, name, value)
     end
 
-    def role(name)
+    def role
       API.get_var_role(handle, name)
     end
 
@@ -58,7 +59,10 @@ module SPSS
       API.set_var_role(handle, name, value)
     end
 
-    # TODO: reader for this
+    def value_labels
+      @value_labels ||= API.get_var_n_value_labels(handle, name).to_h
+    end
+
     def value_labels=(values)
       return if values == :no_labels
 
@@ -66,15 +70,23 @@ module SPSS
       API.set_var_n_value_labels(handle, [name], values)
     end
 
+    def numeric_value
+      API.get_value_numeric(handle, vhandle)
+    end
+
     def numeric_value=(value)
       API.set_value_numeric(handle, vhandle, value)
+    end
+
+    def char_value(size)
+      API.get_value_char(handle, vhandle, size)
     end
 
     def char_value=(value)
       API.set_value_char(handle, vhandle, value)
     end
 
-    def print_format(name)
+    def print_format
       API.get_var_print_format(handle, name)
     end
 
@@ -84,7 +96,7 @@ module SPSS
     end
 
     # TODO: writer for this
-    def write_format(name)
+    def write_format
       API.get_var_write_format(handle, name)
     end
 

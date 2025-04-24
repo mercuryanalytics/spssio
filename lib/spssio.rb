@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-require "spss/reader"
-require "spss/writer"
+require_relative "spss/reader"
+require_relative "spss/writer"

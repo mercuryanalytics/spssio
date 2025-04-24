@@ -51,8 +51,14 @@ RSpec.describe SPSS::API do
     expect(subject.set_locale(0, "en_US.UTF-8")).to eq "en_US.UTF-8"
   end
 
-  it "can set the temp directory", skip: "this blows up" do # FIXME: make this work
-    expect { subject.set_temp_dir(ENV.fetch("TMPDIR", nil)) }.not_to raise_exception
+  describe "#set_temp_dir" do
+    it "can set the temp directory" do
+      expect { subject.set_temp_dir(".") }.not_to raise_exception
+    end
+
+    it "doesn't crash when passing nil" do
+      expect { subject.set_temp_dir(nil) }.to raise_exception(ArgumentError)
+    end
   end
 
   it "can validate proposed variable names", :aggregate_failures do # rubocop:disable RSpec/ExampleLength
@@ -288,7 +294,10 @@ RSpec.describe SPSS::API do
     end
 
     context "with a specific (named) variable" do
-      it "can read the variable info by index", :not_tested # get_var_info(handle, i_var)
+      it "can read the variable info by index" do
+        expect(subject.get_var_info(handle, 1)).to eq [0, "M2MError_Contact"]
+      end
+
       it "can read the compatible variable name" do
         expect(subject.get_var_compat_name(handle, "M2MError_Email")).to eq "V4_A"
       end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "spss/base"
+require_relative "base"
 
 module SPSS
   class Reader < Base
@@ -10,6 +10,7 @@ module SPSS
 
     def initialize(filename)
       super()
+      raise ArgumentError, "input file may not be nil" if filename.nil?
 
       @variable_handles = Hash.new { |hash, key| hash[key] = allocate_var_handle(key) }
       @variables = Hash.new { |hash, key| hash[key] = Variable.new(handle, key) }

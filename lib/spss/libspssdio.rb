@@ -2,14 +2,9 @@
 
 require "ffi"
 require "pathname"
+require_relative "codes"
 
 module SPSS
-  MAX_VARNAME = 64
-  MAX_VARLABEL = 256
-
-  ENCODING_CODEPAGE = 0
-  ENCODING_UTF8 = 1
-
   module LIBSPSSDIO
     extend FFI::Library
 

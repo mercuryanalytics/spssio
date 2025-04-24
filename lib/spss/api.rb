@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require "spss/libspssdio"
-require "spss/status"
+require_relative "libspssdio"
+require_relative "status"
 
 module SPSS
   module IO
     # rubocop:disable Naming/AccessorMethodName, Naming/PredicateName
-
     def add_file_attribute(handle, attrib_name, attrib_sub, attrib_text)
       check! LIBSPSSDIO.spssAddFileAttribute(handle, attrib_name, attrib_sub, attrib_text)
     end
@@ -351,6 +350,8 @@ module SPSS
     end
 
     def get_var_info(handle, i_var)
+      raise ArgumentError, "i_var out of range" if i_var > get_number_of_variables(handle)
+
       var_name = FFI::MemoryPointer.new(:char, 65)
       var_type = FFI::MemoryPointer.new(:int)
       check! LIBSPSSDIO.spssGetVarInfo(handle, i_var, var_name, var_type)
@@ -652,6 +653,8 @@ module SPSS
     end
 
     def set_temp_dir(dir_name)
+      raise ArgumentError, "dir_name cannot be nil" if dir_name.nil?
+
       check! LIBSPSSDIO.spssSetTempDir(dir_name)
     end
 

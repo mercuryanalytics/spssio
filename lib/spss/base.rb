@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "spss/api"
+require_relative "api"
 
 module SPSS
   class Base
