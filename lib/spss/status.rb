@@ -1,8 +1,17 @@
 # frozen_string_literal: true
 
 module SPSS
-  class Error < StandardError; end
-  class Warning < Error; end
+  class StatusCode < StandardError
+    attr_reader :symbol
+
+    def initialize(symbol)
+      super("#{self.class.name} #{symbol}")
+      @symbol = symbol
+    end
+  end
+
+  class Error < StatusCode; end
+  class Warning < StatusCode; end
 
   module Status
     WARNINGS = %i[exc_len64 exc_varlabel unknown_warning3 exc_vallabel file_end no_varsets empty_varsets no_labels
@@ -32,9 +41,14 @@ module SPSS
 
     def self.status!(code)
       return if code.zero?
-      raise Warning, status(code) if code.negative?
 
-      raise Error, status(code)
+      klass = if code.negative?
+                Warning
+              else
+                Error
+              end
+      ex = klass.new(status(code))
+      raise ex
     end
 
     def self.name_status(code)

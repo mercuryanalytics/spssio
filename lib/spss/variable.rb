@@ -5,9 +5,35 @@ module SPSS
     attr_reader :handle
     attr_reader :name
 
-    def initialize(handle, name)
+    def initialize(handle, name, type)
       @handle = handle
       @name = name
+      @type = type
+    end
+
+    def numeric?
+      @type.zero?
+    end
+
+    def sort_indicator(value)
+      value = value.to_i if (value - value.floor).zero?
+      "_#{value.to_s.rjust(Math.log10(value_labels.keys.max).floor + 1, '0')}"
+    end
+
+    def label_for(value)
+      value_labels[value]
+    end
+
+    def presentation(value)
+      return value unless numeric?
+      return nil if value == API.sysmis_val
+
+      "_#{sort_indicator(value)}/#{label_for(value)}"
+    rescue Warning => e
+      raise unless e.symbol == :no_labels
+
+      value = value.to_i if (value - value.floor).zero?
+      value
     end
 
     def alignment
@@ -36,6 +62,8 @@ module SPSS
 
     def label
       API.get_var_label(handle, name)
+    rescue Warning => e
+      raise unless e.symbol == :no_label
     end
 
     def label=(value)

@@ -13,7 +13,7 @@ module SPSS
       raise ArgumentError, "input file may not be nil" if filename.nil?
 
       @variable_handles = Hash.new { |hash, key| hash[key] = allocate_var_handle(key) }
-      @variables = Hash.new { |hash, key| hash[key] = Variable.new(handle, key) }
+      @variables = Hash.new { |hash, key| hash[key] = Variable.new(handle, key, variable_sizes[key]) }
       @value_labels = Hash.new { |hash, key| hash[key] = read_value_labels(key) }
       @handle = API.open_read(filename)
       return unless block_given?
@@ -78,6 +78,14 @@ module SPSS
         API.get_value_numeric(handle, variable_handle(name))
       else
         API.get_value_char(handle, variable_handle(name), sz)
+      end
+    end
+
+    def each_variable
+      return enum_for(:each_variable) unless block_given?
+
+      variable_names.each do |name|
+        yield variables[name]
       end
     end
 
