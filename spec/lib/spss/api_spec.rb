@@ -15,8 +15,8 @@ RSpec.describe SPSS::API do
   # NOTE: these can't be reliably called once the library has actually "done" anything,
   # so the test is currently suppressed
   it "can set the interface encoding", :aggregate_failures, :not_tested do
-    expect { subject.set_interface_encoding(SPSS::ENCODING_UTF8) }.not_to raise_exception
-    expect { subject.set_interface_encoding(SPSS::ENCODING_CODEPAGE) }.not_to raise_exception
+    expect { subject.set_interface_encoding(SPSS::ENCODING_UTF8) }.not_to raise_error
+    expect { subject.set_interface_encoding(SPSS::ENCODING_CODEPAGE) }.not_to raise_error
   end
 
   it "can return the system-missing value" do
@@ -53,11 +53,11 @@ RSpec.describe SPSS::API do
 
   describe "#set_temp_dir" do
     it "can set the temp directory" do
-      expect { subject.set_temp_dir(".") }.not_to raise_exception
+      expect { subject.set_temp_dir(".") }.not_to raise_error
     end
 
     it "doesn't crash when passing nil" do
-      expect { subject.set_temp_dir(nil) }.to raise_exception(ArgumentError)
+      expect { subject.set_temp_dir(nil) }.to raise_error(ArgumentError)
     end
   end
 
@@ -160,7 +160,7 @@ RSpec.describe SPSS::API do
     end
 
     it "can read the case weight variable name" do
-      expect { subject.get_case_weight_var(handle) }.to raise_error SPSS::Warning, "no_casewgt"
+      expect { subject.get_case_weight_var(handle) }.to raise_error SPSS::Warning, "Warning no_casewgt"
     end
 
     it "can get the compression attribute" do
@@ -168,7 +168,7 @@ RSpec.describe SPSS::API do
     end
 
     it "can report the forcasting (trends) date variable information" do
-      expect { subject.get_date_variables(handle) }.to raise_exception SPSS::Warning, "no_dateinfo"
+      expect { subject.get_date_variables(handle) }.to raise_error SPSS::Warning, "Warning no_dateinfo"
     end
 
     it "can read the DEW GUID" do
@@ -176,7 +176,7 @@ RSpec.describe SPSS::API do
     end
 
     it "can read the DEW info" do
-      expect { subject.get_dew_info(handle) }.to raise_exception SPSS::Warning, "no_dew"
+      expect { subject.get_dew_info(handle) }.to raise_error SPSS::Warning, "Warning no_dew"
     end
 
     it "can estimate the number of cases" do
@@ -271,7 +271,7 @@ RSpec.describe SPSS::API do
     end
 
     it "can read the variable sets" do
-      expect { subject.get_variable_sets(handle) }.to raise_exception SPSS::Warning, "empty_varsets"
+      expect { subject.get_variable_sets(handle) }.to raise_error SPSS::Warning, "Warning empty_varsets"
     end
 
     it "can test whether the file's encoding is compatible with the current interface encoding" do
@@ -360,19 +360,19 @@ RSpec.describe SPSS::API do
         it "can return the value labels" do
           expect do
             subject.get_var_c_value_labels(handle, "M2MError_Email")
-          end.to raise_exception SPSS::Warning, "no_labels"
+          end.to raise_error SPSS::Warning, "Warning no_labels"
         end
 
         it "can return the label for a single value" do
           expect do
             subject.get_var_c_value_label(handle, "M2MError_Email", "x")
-          end.to raise_exception SPSS::Warning, "no_labels"
+          end.to raise_error SPSS::Warning, "Warning no_labels"
         end
 
         it "can return long labels" do
           expect do
             subject.get_var_c_value_label_long(handle, "M2MError_Email", "x", 256)
-          end.to raise_exception SPSS::Warning, "no_labels"
+          end.to raise_error SPSS::Warning, "Warning no_labels"
         end
       end
 
@@ -396,11 +396,11 @@ RSpec.describe SPSS::API do
     end
 
     it "can read case records" do
-      expect { subject.read_case_record(handle) }.not_to raise_exception
+      expect { subject.read_case_record(handle) }.not_to raise_error
     end
 
     it "can seek to a specific case by index" do
-      expect { subject.seek_next_case(handle, 3) }.not_to raise_exception
+      expect { subject.seek_next_case(handle, 3) }.not_to raise_error
     end
 
     context "with case data" do
@@ -484,7 +484,7 @@ RSpec.describe SPSS::API do
 
     it "can read the variable sets", :not_tested do
       pending "variable sets"
-      expect { subject.set_variable_sets(handle) }.to raise_exception SPSS::Warning, "empty_varsets"
+      expect { subject.set_variable_sets(handle) }.to raise_error SPSS::Warning, "Warning empty_varsets"
     end
   end
 

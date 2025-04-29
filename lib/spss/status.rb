@@ -5,7 +5,7 @@ module SPSS
     attr_reader :symbol
 
     def initialize(symbol)
-      super("#{self.class.name} #{symbol}")
+      super("#{self.class.name.split('::').last} #{symbol}")
       @symbol = symbol
     end
   end

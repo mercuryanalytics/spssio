@@ -6,6 +6,8 @@ module SPSS
   class Reader < Base
     include Enumerable
 
+    class Error < StandardError; end
+
     attr_reader :variables
 
     def initialize(filename)
@@ -49,6 +51,8 @@ module SPSS
 
     def variable_handle(name)
       @variable_handles[name]
+    rescue SPSS::Error => e
+      raise unless e.symbol == :var_notfound
     end
 
     def label(name)
@@ -62,12 +66,7 @@ module SPSS
     def value_label(name, value)
       return if value == missing_value
 
-      ls = values(name)
-      if ls == :no_labels
-        value
-      else
-        ls[value]
-      end
+      values(name).fetch(value)
     end
 
     def fetch(name)

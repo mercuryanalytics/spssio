@@ -92,8 +92,6 @@ module SPSS
     end
 
     def value_labels=(values)
-      return if values == :no_labels
-
       # TODO: figure out how to handle c_value_labels, if they turn up
       API.set_var_n_value_labels(handle, [name], values)
     end

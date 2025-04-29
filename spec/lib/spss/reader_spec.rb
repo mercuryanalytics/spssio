@@ -38,7 +38,7 @@ RSpec.describe SPSS::Reader do
   end
 
   it "can return the labels for a variable's values", :aggregate_failures do
-    expect(subject.values("RID")).to eq :no_labels
+    expect { subject.values("RID") }.to raise_error SPSS::Warning, "Warning no_labels"
     expect(subject.values("Comp")).to include(1.0 => "Started", 2.0 => "Completed", 3.0 => "Screen Out",
                                               4.0 => "Over Quota", 5.0 => "M2M Data Error",
                                               6.0 => "Respondent Marked Bad", 7.0 => "Script Error")
@@ -63,7 +63,7 @@ RSpec.describe SPSS::Reader do
       expect(subject.fetch("Respondent_Serial")).to eq 84
       expect(subject.fetch("SurveyDuration")).to eq 1326
       expect(subject.fetch("ProjectName")).to eq "MA2912GSSONE"
-      expect { subject.fetch("bad_var") }.to raise_error SPSS::Error, 'No such variable "bad_var"'
+      expect { subject.fetch("bad_var") }.to raise_error SPSS::Reader::Error, 'No such variable "bad_var"'
     end
   end
 end
