@@ -35,11 +35,15 @@ module SPSS
       ffi_lib find("libgsk8iccs_64")
     rescue LoadError # rubocop:disable Lint/SuppressedException
     end
-    ffi_lib find("libicudata")
-    ffi_lib find("libicuuc")
-    ffi_lib find("libicui18n")
-    ffi_lib find("libzlib1211spss1")
-    ffi_lib find("libspssdio")
+    begin
+      ffi_lib find("libicudata")
+      ffi_lib find("libicuuc")
+      ffi_lib find("libicui18n")
+      ffi_lib find("libzlib1211spss1")
+      ffi_lib find("libspssdio")
+    rescue LoadError
+      warn "Error loading SPSSIO library"
+    end
 
     module MultRespDefLayout
       def self.included(base)
