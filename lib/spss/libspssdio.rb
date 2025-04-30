@@ -78,7 +78,7 @@ module SPSS
       end
     end
 
-    if @loaded
+    if loaded
       # rubocop:disable Layout/LineLength
       attach_function :spssAddFileAttribute, %i[int string int string], :int # (const int handle, const char* attribName, const int attribSub, const char* attribText)
       attach_function :spssAddMultRespDefC, %i[int string string int string pointer int], :int # (int handle, const har* mrSetName, const char* mrSetLabel, int isDichotomy, const char* countedValue, const char** varNames, int numVars)

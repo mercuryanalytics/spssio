@@ -17,7 +17,7 @@ module SPSS
 
     def sort_indicator(value)
       value = value.to_i if (value - value.floor).zero?
-      "_#{value.to_s.rjust(Math.log10(value_labels.keys.max).floor + 1, '0')}"
+      value.to_s.rjust(Math.log10(value_labels.keys.max).floor + 1, "0")
     end
 
     def label_for(value)
