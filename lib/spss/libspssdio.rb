@@ -44,7 +44,7 @@ module SPSS
       ffi_lib find("libzlib1211spss1")
       ffi_lib find("libspssdio")
     rescue LoadError
-      warn "Error loading SPSSIO library"
+      warn "Error loading SPSSIO library" if RUBY_PLATFORM == "x86_64-linux"
       loaded = false
     end
 
